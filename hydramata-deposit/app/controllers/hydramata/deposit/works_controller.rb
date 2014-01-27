@@ -1,6 +1,5 @@
 class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationController
   respond_to :html
-  layout 'curate_nd/1_column'
 
   class_attribute :responder, instance_predicate: false, instance_accessor: false
   self.responder = Hydramata::Deposit::WorksResponder

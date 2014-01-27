@@ -18,7 +18,7 @@ module Hydramata
     end
 
     def partial_path
-      "curate/form/#{work_type}/deposit/attribute_#{name}"
+      "hydramata/form/#{work_type}/deposit/attribute_#{name}"
     end
 
     def input_options(options = nil)
@@ -27,7 +27,7 @@ module Hydramata
         if type.first.name == 'File'
           options[:as] ||= :file
         elsif type.first.name == "Hydramata::Contributor"
-          options[:as] ||= 'curate/contributors'
+          options[:as] ||= 'hydramata/contributors'
           options[:elements] ||= form.attributes.fetch(:contributors_attributes)
         end
         options[:input_html] ||= {}

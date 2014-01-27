@@ -1,6 +1,6 @@
-require 'curate/deposit/configuration'
+require 'hydramata/deposit/configuration'
 require 'virtus'
-require File.expand_path('../../../../app/models/curate/contributor', __FILE__)
+require File.expand_path('../../../../app/models/hydramata/contributor', __FILE__)
 
 module Hydramata::Deposit
 
@@ -12,9 +12,9 @@ module Hydramata::Deposit
     end
 
     isolate_namespace Hydramata::Deposit
-    engine_name 'curate_deposit'
+    engine_name 'hydramata_deposit'
 
-    initializer 'curate-deposit.initializers' do |app|
+    initializer 'hydramata-deposit.initializers' do |app|
       app.config.paths.add 'app/finalizers', eager_load: true
       app.config.paths.add 'app/forms', eager_load: true
       app.config.paths.add 'app/resolvers', eager_load: true

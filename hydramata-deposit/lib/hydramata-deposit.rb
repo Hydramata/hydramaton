@@ -33,6 +33,6 @@ module Hydramata::Deposit
 
 end
 
-require "curate/deposit/engine"
-require 'curate/deposit/works_responder'
+require "hydramata/deposit/engine"
+require 'hydramata/deposit/works_responder'
 require 'virtus'

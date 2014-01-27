@@ -31,7 +31,7 @@ module Hydramata::Deposit
 
       context 'GET #new' do
         it 'should assign a :work' do
-          get :new, work_type: work_type, use_route: :curate_deposit
+          get :new, work_type: work_type, use_route: :hydramata_deposit
           expect(assigns(:work)).to respond_to :fieldsets
         end
       end
@@ -39,7 +39,7 @@ module Hydramata::Deposit
       context 'POST #create' do
         context 'valid attributes' do
           it 'should assign a work and redirect to completion path' do
-            post :create, work_type: work_type, work: { title: 'Hello' }, use_route: :curate_deposit
+            post :create, work_type: work_type, work: { title: 'Hello' }, use_route: :hydramata_deposit
             expect(assigns(:work)).to eq(work_form)
             expect(response).to be_redirect
           end
@@ -47,7 +47,7 @@ module Hydramata::Deposit
 
         context 'invalid attributes' do
           it 'should assign a work and render new action' do
-            post :create, work_type: work_type, work: { title: ''}, use_route: :curate_deposit
+            post :create, work_type: work_type, work: { title: ''}, use_route: :hydramata_deposit
             expect(response).to be_success
             expect(response).to render_template('new')
           end
@@ -65,7 +65,7 @@ module Hydramata::Deposit
       context 'GET #edit' do
 
         it 'should assign a :work' do
-          get :edit, id: pid, use_route: :curate_deposit
+          get :edit, id: pid, use_route: :hydramata_deposit
           expect(assigns(:work)).to eq(work_form)
           expect(response).to be_success
         end
@@ -74,7 +74,7 @@ module Hydramata::Deposit
       context 'PUT #update' do
         it 'should assign a work and redirect to completion path' do
           work_form.should_receive(:save)
-          put :update, id: pid, work: { title: 'Hello' }, use_route: :curate_deposit
+          put :update, id: pid, work: { title: 'Hello' }, use_route: :hydramata_deposit
           expect(assigns(:work)).to eq(work_form)
           expect(response).to be_redirect
         end

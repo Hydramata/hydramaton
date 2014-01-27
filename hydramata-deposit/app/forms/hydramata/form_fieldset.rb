@@ -23,7 +23,7 @@ module Hydramata
     end
 
     def partial_path
-      "curate/form/#{work_type}/deposit/fieldset_#{name}"
+      "hydramata/form/#{work_type}/deposit/fieldset_#{name}"
     end
 
     protected

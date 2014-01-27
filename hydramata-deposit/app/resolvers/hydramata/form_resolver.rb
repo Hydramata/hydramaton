@@ -2,15 +2,15 @@ module Hydramata
   # Responsible for providing a means of looking up attribute related partials
   # such that we can reuse common partials within the scope:
   #
-  #  render 'curate/form/attribute/article/title'
+  #  render 'hydramata/form/attribute/article/title'
   #
   # By prepending Hydramata::Form::AttributeResolver to the controller's
-  # view path, we will lookup the curate/form/attribute/article/title first
-  # in "curate/form/attribute/article/title" then "curate/form/attribute/title"
+  # view path, we will lookup the hydramata/form/attribute/article/title first
+  # in "hydramata/form/attribute/article/title" then "hydramata/form/attribute/title"
   class FormResolver < ActionView::Resolver
     attr_reader :prefix_scope
     attr_reader :controller
-    def initialize(controller, prefix_scope = /\Acurate\/form\//, *args)
+    def initialize(controller, prefix_scope = /\Ahydramata\/form\//, *args)
       @controller = controller
       @prefix_scope = prefix_scope
       super(*args)
