@@ -9,6 +9,7 @@ into a Hydramaton.
 
 ## Proposed Hydramata Components
 
+* Hydramata::Core - Responsible for providing common functionality shared by Hydramata components.
 * Hydramata::Deposit - Responsible for preparing a deposit. Analogous to writing a book.
 * Hydramata::Mediate - Responsible for mediating a deposit. Analogous to editing a book.
 * Hydramata::Ingest - Responsible for ingesting into the repository. Analogous to printing the book.
