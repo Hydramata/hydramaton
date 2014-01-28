@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
     "jeremy.n.friesen@gmail.com"
   ]
   s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Hydramata::Deposit."
-  s.description = "TODO: Description of Hydramata::Deposit."
+  s.summary     = "A Hydramata Component for Depositing Works"
+  s.description = "A Hydramata Component for Depositing Works"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
