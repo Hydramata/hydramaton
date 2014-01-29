@@ -33,6 +33,6 @@ module Hydramata::Core
 
 end
 
-require "hydramata/Core/engine"
-require 'hydramata/Core/works_responder'
+require "hydramata/core/engine"
+require 'hydramata/core/works_responder'
 require 'virtus'

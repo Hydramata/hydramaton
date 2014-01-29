@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email       = [
     "jeremy.n.friesen@gmail.com"
   ]
-  s.homepage    = "TODO"
+  s.homepage    = "http://hydramata.github.io"
   s.summary     = "A Hydramata Component for Depositing Works"
   s.description = "A Hydramata Component for Depositing Works"
 

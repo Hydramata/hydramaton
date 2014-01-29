@@ -1,3 +1,3 @@
 # Hydramata::Core
 
-A [Hydramata](https://hydramata.github.com) Component for Coreing Works.
+The foundational [Hydramata](https://hydramata.github.com) Component.

@@ -1,7 +1,7 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "hydramata/Core/version"
+require "hydramata/core/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
     "jeremy.n.friesen@gmail.com"
   ]
   s.homepage    = "TODO"
-  s.summary     = "A Hydramata Component for Coreing Works"
-  s.description = "A Hydramata Component for Coreing Works"
+  s.summary     = "The Foundational Hydramata Component"
+  s.description = "The Foundational Hydramata Component"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]
