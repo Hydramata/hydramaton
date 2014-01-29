@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   class_attribute :theme
 
-  self.theme = 'curate_nd'
+  self.theme = 'hydramata'
   helper_method :theme
 end

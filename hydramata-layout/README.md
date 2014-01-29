@@ -1,3 +1,3 @@
-= HydramataLayout
+# Hydramata::Layout
 
-This project rocks and uses MIT-LICENSE.
+Stitches together a UI based on the exposed routes from the various Hydramata components.
