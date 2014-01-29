@@ -13,6 +13,13 @@ PATH
       simple_form
       virtus
 
+PATH
+  remote: ./hydramata-layout
+  specs:
+    hydramata-layout (0.0.1)
+      bootstrap-sass (~> 2.3)
+      rails (~> 4.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,7 +59,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.0.3.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
@@ -242,7 +249,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootstrap-sass (>= 3.0.0.0)
+  bootstrap-sass (~> 2.3)
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner (= 1.0.1)
@@ -255,6 +262,7 @@ DEPENDENCIES
   guard-rspec
   hydramata-core!
   hydramata-deposit!
+  hydramata-layout!
   jbuilder (~> 1.2)
   jquery-rails
   mysql2

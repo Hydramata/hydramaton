@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap
+//
+// Required by Blacklight
+//= require curate
 //= require_tree .
