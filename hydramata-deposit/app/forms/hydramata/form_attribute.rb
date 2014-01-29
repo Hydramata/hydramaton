@@ -32,7 +32,7 @@ module Hydramata
         end
         options[:input_html] ||= {}
         options[:input_html][:multiple] ||= 'multiple'
-        options[:as] ||= :multi_value
+        options[:as] ||= 'hydramata/multi_value'
       else
         if type.name == 'File'
           options[:as] ||= :file

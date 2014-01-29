@@ -15,6 +15,7 @@ module Hydramata::Deposit
     engine_name 'hydramata_deposit'
 
     initializer 'hydramata-deposit.initializers' do |app|
+      require 'simple_form'
       app.config.paths.add 'app/finalizers', eager_load: true
       app.config.paths.add 'app/forms', eager_load: true
       app.config.paths.add 'app/resolvers', eager_load: true

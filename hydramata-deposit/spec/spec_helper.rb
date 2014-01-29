@@ -10,6 +10,22 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+# Extract to separate files
+require 'rspec-html-matchers'
+module InputSupport
+  extend ActiveSupport::Concern
+
+  include RSpec::Rails::HelperExampleGroup
+
+  def input_for(object, attribute_name, options={})
+    helper.simple_form_for object, url: '' do |f|
+      f.input attribute_name, options
+    end
+  end
+end
+
+
+
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
@@ -45,5 +61,9 @@ RSpec.configure do |config|
   config.before(:each) do
     Hydramata::Deposit.reset_config!
   end
+
+  config.include InputSupport, type: :input, example_group: {
+    file_path: config.escaped_path(%w[spec inputs])
+  }
 
 end
