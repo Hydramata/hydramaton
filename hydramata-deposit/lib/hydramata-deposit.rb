@@ -5,6 +5,12 @@ module Hydramata::Deposit
     finalize_new_form_for(work_type, options).new(controller)
   end
 
+  def existing_form_for(controller, identifier, options = {})
+    work_type_finder = options.fetch(:work_type_finder) { Hydramata::Core::WorkDraft.method(:fetch_work_type_by_pid) }
+    work_type = work_type_finder.call(identifier)
+    finalize_new_form_for(work_type, options).new(controller, identifier)
+  end
+
   def finalize_new_form_for(work_type, options = {})
     @new_forms_for ||= {}
     @new_forms_for[work_type.to_s] ||= begin
@@ -16,10 +22,6 @@ module Hydramata::Deposit
     @new_forms_for[work_type.to_s]
   end
 
-  def existing_form_for(controller, identifier)
-    finalize_new_form_for('article').new(controller, identifier)
-  end
-
   def authorize!(controller, work)
     true
   end
@@ -27,7 +29,6 @@ module Hydramata::Deposit
   def reset_configuration!
     @new_forms_for = {}
   end
-
 end
 
 require "hydramata/deposit/engine"
