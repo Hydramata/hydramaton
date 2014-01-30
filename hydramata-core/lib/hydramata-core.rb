@@ -4,6 +4,8 @@ module Hydramata
   module Core
   end
 
+  # Configuration is shared across the Hydramata namespace;
+  # Hydramata.configuration
   class << self
     attr_accessor :configuration
   end
@@ -20,4 +22,3 @@ module Hydramata
 end
 
 require "hydramata/core/engine"
-require 'hydramata/core/works_responder'
