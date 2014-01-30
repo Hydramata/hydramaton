@@ -12,5 +12,12 @@ module Hydramata::Core
       )
     end
 
+    # From api.rubyonrails.org
+    #
+    # Last configurable block to run. Called after frameworks initialize.
+    config.after_initialize do
+      Hydramata.configure {|config| config.lock! }
+    end
+
   end
 end
