@@ -1,4 +1,6 @@
 class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationController
+  layout 'hydramata/1_column'
+
   respond_to :html
 
   class_attribute :responder, instance_predicate: false, instance_accessor: false
