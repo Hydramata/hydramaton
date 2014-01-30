@@ -12,6 +12,14 @@ module Hydramata
 
     context 'unlocked' do
 
+      it 'has keys' do
+        expect(subject.keys).to eq([:key, :deep])
+      end
+
+      it 'has a friendly inspect' do
+        expect(subject.inspect).to eq({key: value, deep: {seeded: { key: deep_value}}}.inspect)
+      end
+
       it 'handles deeply nested configuration' do
         expect(subject[:deep][:seeded][:key]).to eq(deep_value)
       end

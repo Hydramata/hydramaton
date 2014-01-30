@@ -1,5 +1,3 @@
-require 'hydramata/core/configuration'
-
 module Hydramata::Core
 
   class Engine < ::Rails::Engine
