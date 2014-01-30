@@ -1,12 +1,5 @@
 module Hydramata::Deposit
   module_function
-  def config
-    Engine.config
-  end
-
-  def configure
-    yield(config)
-  end
 
   def new_form_for(controller, work_type, options = {})
     finalize_new_form_for(work_type, options).new(controller)
@@ -15,9 +8,9 @@ module Hydramata::Deposit
   def finalize_new_form_for(work_type, options = {})
     @new_forms_for ||= {}
     @new_forms_for[work_type.to_s] ||= begin
-      configuration = options.fetch(:config) { config }
+      configuration = options.fetch(:config) { Hydramata.configuration.deposit }
       finalizer = options.fetch(:finalizer) { Hydramata::FormFinalizer }
-      work_config = configuration.new_form_for(work_type)
+      work_config = configuration.new_form_for.fetch(work_type)
       finalizer.call(work_type, work_config)
     end
     @new_forms_for[work_type.to_s]
