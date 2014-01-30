@@ -24,8 +24,7 @@ Gem::Specification.new do |s|
   s.licenses = ['APACHE2']
 
   s.add_dependency "rails", "~> 4.0.2"
-  s.add_dependency 'virtus'
-
+  s.add_dependency 'configatron', '3.0.0.rc1'
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
 end

@@ -1,5 +1,4 @@
 require 'hydramata/core/configuration'
-require 'virtus'
 
 module Hydramata::Core
 
