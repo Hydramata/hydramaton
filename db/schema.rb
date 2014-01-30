@@ -11,16 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130153920) do
+ActiveRecord::Schema.define(version: 20140130154657) do
 
   create_table "hydramata_core_work_drafts", primary_key: "false", force: true do |t|
     t.string  "pid"
-    t.string  "work_type",             limit: 64
-    t.integer "creator"
-    t.string  "creator_type",          limit: 64
-    t.text    "serialized_attributes", limit: 2147483647
+    t.string  "work_type",        limit: 64
+    t.integer "owner"
+    t.string  "owner_type",       limit: 64
+    t.text    "attributes_store", limit: 2147483647
   end
 
-  add_index "hydramata_core_work_drafts", ["creator", "creator_type"], name: "index_hydramata_core_work_drafts_on_creator_and_creator_type", using: :btree
+  add_index "hydramata_core_work_drafts", ["owner", "owner_type"], name: "index_hydramata_core_work_drafts_on_owner_and_owner_type", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
