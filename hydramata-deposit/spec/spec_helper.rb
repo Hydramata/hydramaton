@@ -65,7 +65,7 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:each) do
-    Hydramata::Deposit.reset_config!
+    Hydramata::Deposit.reset_configuration!
   end
 
   config.include InputSupport, type: :input, example_group: {

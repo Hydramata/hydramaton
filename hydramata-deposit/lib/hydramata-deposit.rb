@@ -24,7 +24,7 @@ module Hydramata::Deposit
     true
   end
 
-  def reset_config!
+  def reset_configuration!
     @new_forms_for = {}
   end
 
