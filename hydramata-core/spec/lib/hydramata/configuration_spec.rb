@@ -5,19 +5,23 @@ module Hydramata
     subject { described_class.new }
     let(:value) { double }
     let(:deep_value) { double }
+    let(:yielded_value) { double }
     before(:each) do
       subject.key = value
       subject.deep.seeded.key = deep_value
+      subject.via_block do |config|
+        config.yielded = yielded_value
+      end
     end
 
     context 'unlocked' do
 
       it 'has keys' do
-        expect(subject.keys).to eq([:key, :deep])
+        expect(subject.keys).to eq([:key, :deep, :via_block])
       end
 
       it 'has a friendly inspect' do
-        expect(subject.inspect).to eq({key: value, deep: {seeded: { key: deep_value}}}.inspect)
+        expect(subject.inspect).to eq({key: value, deep: {seeded: { key: deep_value}}, via_block: {yielded: yielded_value}}.inspect)
       end
 
       it 'handles deeply nested configuration' do
