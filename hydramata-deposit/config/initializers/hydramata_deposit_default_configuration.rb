@@ -1,5 +1,17 @@
 Hydramata.configure do |hydramata|
   hydramata.deposit do |deposit|
+    deposit.work_draft_creator = lambda {|object, attributes|
+      Hydramata::Core::WorkDraft.create!(
+        pid: object.minted_identifier,
+        attributes_store: attributes,
+        work_type: object.work_type
+      )
+    }
+    deposit.work_draft_attribute_loader = lambda {|form|
+      work_draft = Hydramata::Core::WorkDraft.where(pid: form.minted_identifier).first!
+      form.attributes = work_draft.attributes_store
+    }
+
     deposit.new_form_for.generic_work =
     {
       fieldsets: {
@@ -51,10 +63,10 @@ Hydramata.configure do |hydramata|
         }
       },
       on_save: {
-        write_attributes: lambda {|object, attributes| }
+        write_attributes: deposit.work_draft_creator
       },
       on_load_from_persistence: {
-        load_attributes: lambda {|form| }
+        load_attributes: deposit.work_draft_attribute_loader
       },
       identity_minter: 'Hydramata::Core::NoidMintingService'
     }
@@ -109,7 +121,10 @@ Hydramata.configure do |hydramata|
         }
       },
       on_save: {
-        write_attributes: lambda {|object, attributes| }
+        write_attributes: deposit.work_draft_creator
+      },
+      on_load_from_persistence: {
+        load_attributes: deposit.work_draft_attribute_loader
       },
       identity_minter: 'Hydramata::Core::NoidMintingService'
     }
@@ -164,7 +179,10 @@ Hydramata.configure do |hydramata|
         }
       },
       on_save: {
-        write_attributes: lambda {|object, attributes| }
+        write_attributes: deposit.work_draft_creator
+      },
+      on_load_from_persistence: {
+        load_attributes: deposit.work_draft_attribute_loader
       },
       identity_minter: 'Hydramata::Core::NoidMintingService'
     }
@@ -228,7 +246,10 @@ Hydramata.configure do |hydramata|
         }
       },
       on_save: {
-        write_attributes: lambda {|object, attributes| }
+        write_attributes: deposit.work_draft_creator
+      },
+      on_load_from_persistence: {
+        load_attributes: deposit.work_draft_attribute_loader
       },
       identity_minter: 'Hydramata::Core::NoidMintingService'
     }
@@ -300,7 +321,10 @@ Hydramata.configure do |hydramata|
         }
       },
       on_save: {
-        write_attributes: lambda {|object, attributes| }
+        write_attributes: deposit.work_draft_creator
+      },
+      on_load_from_persistence: {
+        load_attributes: deposit.work_draft_attribute_loader
       },
       identity_minter: 'Hydramata::Core::NoidMintingService'
     }

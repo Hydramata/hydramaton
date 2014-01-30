@@ -11,7 +11,7 @@ module Hydramata::Deposit
         elsif has_errors? && default_action
           render :action => default_action
         else
-          redirect_to("/concern/#{resource.work_type.pluralize}/#{resource.to_param}", { flash: { success: "Depositing #{resource}"} })
+          redirect_to(controller.hydramata_deposit.edit_work_path(resource.to_param), { flash: { success: "Depositing #{resource}"} })
         end
       end
 

@@ -16,6 +16,10 @@ module Hydramata::Deposit
     @new_forms_for[work_type.to_s]
   end
 
+  def existing_form_for(controller, identifier)
+    finalize_new_form_for('article').new(controller, identifier)
+  end
+
   def authorize!(controller, work)
     true
   end
