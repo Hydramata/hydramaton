@@ -2,8 +2,8 @@ PATH
   remote: ./hydramata-core
   specs:
     hydramata-core (0.0.1)
+      configatron (= 3.0.0.rc1)
       rails (~> 4.0.2)
-      virtus
 
 PATH
   remote: ./hydramata-deposit
@@ -85,6 +85,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
+    configatron (3.0.0.rc1)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)

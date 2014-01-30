@@ -4,11 +4,6 @@ module Hydramata::Core
 
   class Engine < ::Rails::Engine
 
-    def initialize(*args)
-      super
-      @config = Hydramata::Core::Configuration.new(find_root_with_flag("lib"))
-    end
-
     isolate_namespace Hydramata::Core
     engine_name 'hydramata_core'
 
