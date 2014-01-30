@@ -1,4 +1,5 @@
 require 'virtus'
+require 'hydramata-core'
 require File.expand_path('../../../../app/models/hydramata/contributor', __FILE__)
 
 module Hydramata::Deposit

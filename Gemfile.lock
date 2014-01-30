@@ -19,6 +19,7 @@ PATH
   specs:
     hydramata-layout (0.0.1)
       bootstrap-sass (~> 2.3)
+      hydramata-core
       rails (~> 4.0.2)
 
 GEM
