@@ -2,8 +2,16 @@ PATH
   remote: .
   specs:
     hydramata-deposit (0.0.1)
+      hydramata-core
       rails (~> 4.0.2)
       simple_form
+      virtus
+
+PATH
+  remote: ../hydramata-core
+  specs:
+    hydramata-core (0.0.1)
+      rails (~> 4.0.2)
       virtus
 
 GEM
@@ -169,6 +177,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  hydramata-core!
   hydramata-deposit!
   rspec
   rspec-html-matchers

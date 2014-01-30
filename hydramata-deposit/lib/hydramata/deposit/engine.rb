@@ -95,7 +95,7 @@ module Hydramata::Deposit
             form.attributes = persisted_object.attributes
           }
         },
-        identity_minter: 'Hydramata::Deposit::NoidMintingService'
+        identity_minter: 'Hydramata::Core::NoidMintingService'
       }
     )
 
@@ -157,7 +157,7 @@ module Hydramata::Deposit
             actor.create
           }
         },
-        identity_minter: 'Hydramata::Deposit::NoidMintingService'
+        identity_minter: 'Hydramata::Core::NoidMintingService'
       }
     )
 
@@ -219,7 +219,7 @@ module Hydramata::Deposit
             actor.create
           }
         },
-        identity_minter: 'Hydramata::Deposit::NoidMintingService'
+        identity_minter: 'Hydramata::Core::NoidMintingService'
       }
     )
 
@@ -290,7 +290,7 @@ module Hydramata::Deposit
             actor.create
           }
         },
-        identity_minter: 'Hydramata::Deposit::NoidMintingService'
+        identity_minter: 'Hydramata::Core::NoidMintingService'
       }
     )
     config.register_new_form_for(
@@ -368,7 +368,7 @@ module Hydramata::Deposit
             actor.create
           }
         },
-        identity_minter: 'Hydramata::Deposit::NoidMintingService'
+        identity_minter: 'Hydramata::Core::NoidMintingService'
       }
     )
   end
