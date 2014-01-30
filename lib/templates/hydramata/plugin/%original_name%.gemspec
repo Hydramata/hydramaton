@@ -20,10 +20,10 @@ Gem::Specification.new do |s|
 
   <%= '# ' if options.dev? || options.edge? -%>s.add_dependency "rails", "~> <%= Rails::VERSION::STRING %>"
 <% unless options[:skip_active_record] -%>
+  s.add_dependency "hydramata-core"
 
   s.add_development_dependency "<%= gem_for_database %>"
 <% end -%>
   s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "hydramata-core"
 
 end
