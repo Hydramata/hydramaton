@@ -14,10 +14,8 @@ gemspec
 # gem 'debugger'
 
 gem 'byebug', group: [:development, :test]
-gem 'rspec', group: [:development, :test]
-gem 'rspec-rails', group: [:development, :test]
 gem 'guard-bundler', group: [:development, :test]
 gem 'guard-rails', group: [:development, :test]
 gem 'guard-rspec', group: [:development, :test]
-gem 'ruby_gntp', group: [:development, :test]
+gem 'simplecov', group: [:development, :test]
 gem 'hydramata-core', path: '../hydramata-core'

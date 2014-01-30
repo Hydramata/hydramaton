@@ -1,6 +1,12 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
+if ENV['COVERAGE']
+  require 'simplecov'
+  SimpleCov.start 'rails'
+  SimpleCov.command_name "spec"
+end
+
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
 require 'rspec/rails'

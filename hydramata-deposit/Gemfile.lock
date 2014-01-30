@@ -11,8 +11,8 @@ PATH
   remote: ../hydramata-core
   specs:
     hydramata-core (0.0.1)
+      configatron (= 3.0.0.rc1)
       rails (~> 4.0.2)
-      virtus
 
 GEM
   remote: https://rubygems.org/
@@ -56,9 +56,11 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     columnize (0.3.6)
+    configatron (3.0.0.rc1)
     debugger-linecache (1.2.0)
     descendants_tracker (0.0.3)
     diff-lcs (1.2.5)
+    docile (1.1.2)
     equalizer (0.0.9)
     erubis (2.7.0)
     ffi (1.9.3)
@@ -139,10 +141,14 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    ruby_gntp (0.3.4)
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -179,8 +185,7 @@ DEPENDENCIES
   guard-rspec
   hydramata-core!
   hydramata-deposit!
-  rspec
   rspec-html-matchers
   rspec-rails
-  ruby_gntp
+  simplecov
   sqlite3
