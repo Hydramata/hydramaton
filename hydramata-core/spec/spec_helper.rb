@@ -42,8 +42,4 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.before(:each) do
-    Hydramata::Core.reset_config!
-  end
-
 end

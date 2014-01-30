@@ -9,6 +9,7 @@ PATH
   remote: ./hydramata-deposit
   specs:
     hydramata-deposit (0.0.1)
+      hydramata-core
       rails (~> 4.0.2)
       simple_form
       virtus
