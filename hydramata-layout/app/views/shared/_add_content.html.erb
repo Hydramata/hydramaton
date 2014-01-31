@@ -7,14 +7,16 @@
       <li>
         <strong class="menu-heading item-with-options">Add a Work</strong>
         <ul class="item-options quick-classify">
-          <li><%= link_to(
-                "New Article",
-                hydramata_deposit.new_work_path(work_type: 'article'),
-                class: "item-option contextual-quick-classify new-article",
-                role: 'menuitem'
-              ) %>
-          </li>
-          <li><%= link_to 'More Options', hydramata_deposit.choose_a_work_type_path, class: 'item-option link-to-full-list', role: 'menuitem' %></li>
+          <% Hydramata.configuration.deposit.new_form_for.keys.each do |work_type| %>
+            <li><%= link_to(
+                  "New #{work_type.to_s.titleize}",
+                  hydramata_deposit.new_work_path(work_type: work_type.to_s),
+                  class: "item-option contextual-quick-classify new-article",
+                  role: 'menuitem'
+                ) %>
+            </li>
+          <% end %>
+          <li><%= link_to 'More Options', '#', class: 'item-option link-to-full-list', role: 'menuitem' %></li>
         </ul>
       </li>
       <li class="divider"></li>
