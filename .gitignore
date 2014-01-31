@@ -81,6 +81,6 @@ pickle-email-*.html
 # Ignore application configuration
 /config/application.yml
 
-*.log
-*.sqlite*
-*/tmp/*
+**.log
+**.sqlite*
+**/tmp/*
