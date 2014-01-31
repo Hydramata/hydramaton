@@ -12,10 +12,10 @@ describe "Depositing a work" do
     end
     click_on("Create Article")
 
+    require 'byebug'; byebug; true;
     within('.presenter.presenter-article') do
       expect(page).to have_selector('.attribute.title', text: "A Verbose Treatise")
       expect(page).to have_selector('.attribute.abstract', text: "Lorem ipsum")
-      expect(page).to have_selector('.attribute.files', text: /#{File.basename(__FILE__)}/)
     end
     click_on("Edit this article")
 

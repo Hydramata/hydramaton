@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131184626) do
+ActiveRecord::Schema.define(version: 20140131212447) do
+
+  create_table "hydramata_core_attachments", id: false, force: true do |t|
+    t.string   "pid",                   limit: 32, null: false
+    t.string   "attached_to_pid",       limit: 32, null: false
+    t.string   "attached_file_name"
+    t.string   "attached_content_type"
+    t.integer  "attached_file_size"
+    t.datetime "attached_updated_at"
+  end
+
+  add_index "hydramata_core_attachments", ["attached_to_pid"], name: "index_hydramata_core_attachments_on_attached_to_pid", using: :btree
+  add_index "hydramata_core_attachments", ["pid"], name: "index_hydramata_core_attachments_on_pid", using: :btree
 
   create_table "hydramata_core_relationships", force: true do |t|
     t.string  "subject_id",   limit: 32

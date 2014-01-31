@@ -6,6 +6,7 @@ class CreateHydramataCoreWorkDraft < ActiveRecord::Migration
       t.integer :owner_id
       t.string :owner_type, limit: 64
       t.text :attributes_store, limit: 2147483647
+      t.timestamps
     end
 
     add_index :hydramata_core_work_drafts, [:owner_id, :owner_type]

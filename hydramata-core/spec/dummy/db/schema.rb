@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20140131203748) do
   create_table "hydramata_core_attachments", id: false, force: true do |t|
     t.string   "pid",                   limit: 32, null: false
     t.string   "attached_to_pid",       limit: 32, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "attached_file_name"
     t.string   "attached_content_type"
     t.integer  "attached_file_size"
@@ -26,13 +28,15 @@ ActiveRecord::Schema.define(version: 20140131203748) do
   add_index "hydramata_core_attachments", ["pid"], name: "index_hydramata_core_attachments_on_pid"
 
   create_table "hydramata_core_relationships", force: true do |t|
-    t.string  "subject_id",   limit: 32
-    t.string  "subject_type", limit: 32
-    t.string  "relationship", limit: 64
-    t.string  "target_id",    limit: 32
-    t.string  "target_type",  limit: 32
-    t.integer "creator_id"
-    t.string  "creator_type", limit: 64
+    t.string   "subject_id",   limit: 32
+    t.string   "subject_type", limit: 32
+    t.string   "relationship", limit: 64
+    t.string   "target_id",    limit: 32
+    t.string   "target_type",  limit: 32
+    t.integer  "creator_id"
+    t.string   "creator_type", limit: 64
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "hydramata_core_relationships", ["creator_id", "creator_type"], name: "hc_rel_creator"
@@ -40,11 +44,13 @@ ActiveRecord::Schema.define(version: 20140131203748) do
   add_index "hydramata_core_relationships", ["target_id", "target_type"], name: "hc_rel_target"
 
   create_table "hydramata_core_work_drafts", id: false, force: true do |t|
-    t.string  "pid",                                 null: false
-    t.string  "work_type",        limit: 64,         null: false
-    t.integer "owner_id"
-    t.string  "owner_type",       limit: 64
-    t.text    "attributes_store", limit: 2147483647
+    t.string   "pid",                                 null: false
+    t.string   "work_type",        limit: 64,         null: false
+    t.integer  "owner_id"
+    t.string   "owner_type",       limit: 64
+    t.text     "attributes_store", limit: 2147483647
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "hydramata_core_work_drafts", ["owner_id", "owner_type"], name: "index_hydramata_core_work_drafts_on_owner_id_and_owner_type"

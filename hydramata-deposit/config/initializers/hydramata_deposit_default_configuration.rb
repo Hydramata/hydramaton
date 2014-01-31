@@ -2,15 +2,21 @@ Hydramata.configure do |hydramata|
   hydramata.layout.theme = 'hydramata/deposit'
   hydramata.deposit do |deposit|
     deposit.work_draft_creator = lambda {|object, attributes|
-      Hydramata::Core::WorkDraft.create!(
-        pid: object.minted_identifier,
-        attributes_store: attributes,
-        work_type: object.work_type
-      )
+      Hydramata::Core::WorkDraft.transaction do
+        # @TODO - better handle this
+        files = attributes.delete(:files)
+        Hydramata::Core::WorkDraft.create!(
+          pid: object.minted_identifier,
+          attributes_store: attributes,
+          files: files,
+          work_type: object.work_type
+        )
+      end
     }
     deposit.work_draft_attribute_loader = lambda {|form|
       work_draft = Hydramata::Core::WorkDraft.where(pid: form.minted_identifier).first!
       form.attributes = work_draft.attributes_store
+      form.files = work_draft.files
     }
 
     deposit.new_form_for.generic_work =

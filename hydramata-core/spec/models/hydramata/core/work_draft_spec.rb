@@ -41,6 +41,7 @@ module Hydramata::Core
       subject { Hydramata::Core::WorkDraft.new(pid: pid) }
       its(:to_param) { should eq pid }
       its(:to_key) { should eq [pid] }
+      its(:files) { should eq [] }
     end
   end
 end

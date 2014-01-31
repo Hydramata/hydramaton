@@ -8,6 +8,7 @@ class CreateHydramataCoreRelationship < ActiveRecord::Migration
       t.string :target_type, limit: 32
       t.integer :creator_id
       t.string :creator_type, limit: 64
+      t.timestamps
     end
 
     add_index :hydramata_core_relationships, [:subject_id, :subject_type], name: 'hc_rel_subject'

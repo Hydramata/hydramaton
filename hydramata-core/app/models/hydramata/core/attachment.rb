@@ -1,4 +1,6 @@
 class Hydramata::Core::Attachment < ActiveRecord::Base
+  self.primary_key = :pid
+
   has_attached_file :attached
   validates :attached, attachment_presence: true
 
