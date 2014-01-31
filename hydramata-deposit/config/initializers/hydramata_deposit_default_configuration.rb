@@ -1,4 +1,5 @@
 Hydramata.configure do |hydramata|
+  hydramata.layout.theme = 'hydramata/deposit'
   hydramata.deposit do |deposit|
     deposit.work_draft_creator = lambda {|object, attributes|
       Hydramata::Core::WorkDraft.create!(

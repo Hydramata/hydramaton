@@ -14,6 +14,13 @@
 //= require jquery-ui-1.9.2/jquery.ui.position
 //= require jquery-ui-1.9.2/jquery.ui.autocomplete
 //
+//= require bootstrap-dropdown
+//= require bootstrap-button
+//= require bootstrap-collapse
+//= require bootstrap-tooltip
+//= require bootstrap-popover
+//= require bootstrap-datepicker/core
+//
 //= require manage_repeating_fields
 //= require toggle_details
 //= require help_modal
@@ -28,31 +35,31 @@
 
 // Initialize plugins and Bootstrap dropdowns on jQuery's ready event as well as
 // Turbolinks's page change event.
-Blacklight.onLoad(function() {
-  $('abbr').tooltip();
+// Blacklight.onLoad(function() {
+//   $('abbr').tooltip();
 
-  $('body').on('keypress', '.multi-text-field', function(event) {
-    var $activeField = $(event.target).parents('.field-wrapper'),
-        $activeFieldControls = $activeField.children('.field-controls'),
-        $addControl=$activeFieldControls.children('.add'),
-        $removeControl=$activeFieldControls.children('.remove');
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      $addControl.click()
-      $removeControl.click()
-    }
-  });
-  $('.multi_value.control-group').manage_fields();
-  $('.link-users').linkUsers();
-  $('.proxy-rights').proxyRights();
+//   $('body').on('keypress', '.multi-text-field', function(event) {
+//     var $activeField = $(event.target).parents('.field-wrapper'),
+//         $activeFieldControls = $activeField.children('.field-controls'),
+//         $addControl=$activeFieldControls.children('.add'),
+//         $removeControl=$activeFieldControls.children('.remove');
+//     if (event.keyCode == 13) {
+//       event.preventDefault();
+//       $addControl.click()
+//       $removeControl.click()
+//     }
+//   });
+//   $('.multi_value.control-group').manage_fields();
+//   $('.link-users').linkUsers();
+//   $('.proxy-rights').proxyRights();
 
 
-  $('#set-access-controls .datepicker').datepicker({
-    format: 'yyyy-mm-dd',
-    startDate: '+1d'
-  });
+//   $('#set-access-controls .datepicker').datepicker({
+//     format: 'yyyy-mm-dd',
+//     startDate: '+1d'
+//   });
 
-  $('.remove-member').on('ajax:success', function(){window.location.href = window.location.href});
+//   $('.remove-member').on('ajax:success', function(){window.location.href = window.location.href});
 
-  $("[data-toggle='dropdown']").dropdown();
-});
+//   $("[data-toggle='dropdown']").dropdown();
+// });

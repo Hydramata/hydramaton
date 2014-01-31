@@ -1,6 +1,8 @@
 class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationController
   respond_to :html
 
+  layout "#{Hydramata.configuration.layout.theme}/1_column"
+
   class_attribute :responder, instance_predicate: false, instance_accessor: false
   self.responder = Hydramata::Deposit::WorksResponder
   prepend_view_path Hydramata::FormResolver.new(self)
