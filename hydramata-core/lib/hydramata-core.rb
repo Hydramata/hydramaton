@@ -1,4 +1,5 @@
 require 'hydramata/configuration'
+require 'paperclip'
 
 module Hydramata
   module Core
