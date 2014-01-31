@@ -20,7 +20,6 @@ Hydramata.configure do |hydramata|
         {
           attributes: {
             title: String,
-            contributors_attributes: Array[Hydramata::Contributor],
             description: String
           },
           validates: {
@@ -79,7 +78,6 @@ Hydramata.configure do |hydramata|
         {
           attributes: {
             title: String,
-            contributors_attributes: Array[Hydramata::Contributor],
             abstract: String
           },
           validates: {
@@ -137,7 +135,6 @@ Hydramata.configure do |hydramata|
         {
           attributes: {
             title: String,
-            contributors_attributes: Array[Hydramata::Contributor],
             description: String
           },
           validates: {
@@ -195,7 +192,6 @@ Hydramata.configure do |hydramata|
         {
           attributes: {
             title: String,
-            contributors_attributes: Array[Hydramata::Contributor],
             date_created: Array[Date],
             description: String,
             category: Array[String],
@@ -262,7 +258,6 @@ Hydramata.configure do |hydramata|
         {
           attributes: {
             title: String,
-            contributors_attributes: Array[Hydramata::Contributor],
             description: String
           },
           validates: {
