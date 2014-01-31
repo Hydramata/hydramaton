@@ -80,5 +80,21 @@ module Hydramata::Deposit
         end
       end
     end
+
+    context 'show' do
+      before(:each) do
+        Hydramata::Deposit.should_receive(:existing_form_for).with(controller, pid).and_return(work_presenter)
+        Hydramata::Deposit.should_receive(:authorize!).with(controller, work_presenter).and_return(true)
+      end
+      context 'GET #show' do
+        let(:work_presenter_class) { Hydramata::FormFinalizer.call(work_type, work_form_configuration) }
+        let(:work_presenter) { work_presenter_class.new(controller, pid) }
+        it 'should assign a :work' do
+          get :show, id: pid, use_route: :hydramata_deposit
+          expect(assigns(:work)).to eq(work_presenter)
+          expect(response).to be_success
+        end
+      end
+    end
   end
 end

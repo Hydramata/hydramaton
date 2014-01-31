@@ -25,7 +25,7 @@ module Hydramata::Deposit::WorksResponder
       context 'get?' do
         let(:get) { false }
         it 'raises an error' do
-          hydramata_deposit.should_receive(:edit_work_path).with(resource.to_param).and_return('/path/to/resource')
+          hydramata_deposit.should_receive(:work_path).with(resource.to_param).and_return('/path/to/resource')
           subject.should_receive(:redirect_to).with {|path, options| path == '/path/to/resource' && options[:flash][:success] }
           subject.navigation_behavior(error)
         end

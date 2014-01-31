@@ -1,4 +1,33 @@
-<% content_for :page_title, "Show" %>
+<% content_for :page_title, "Show #{work.work_type}" %>
 <% content_for :page_header do %>
-<h2>Your Work</h2>
+<h2>Your <%= work.work_type %></h2>
 <% end %>
+
+<div class="presenter presenter-<%= work.work_type.to_s.dasherize %>">
+  <% work.fieldsets.each do |fieldset| %>
+    <table class="table table-striped <%= dom_class(work) %> attributes">
+      <caption class="table-heading"><h2><%= fieldset.name %></h2></caption>
+      <thead>
+        <tr><th>Attribute Name</th><th>Values</th></tr>
+      </thead>
+      <tbody>
+        <% fieldset.attributes.each do |attribute| %>
+          <tr>
+            <th><%= attribute.name %></th>
+            <td>
+              <ul class="tabular">
+                <% [work.send(attribute.name)].flatten.compact.each do |value| %>
+                  <li class="attribute <%= attribute.name %>"><%= value %>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<div class="form-actions">
+  <%= link_to "Edit this #{work.work_type}", edit_work_path(work), class: 'btn btn-primary' %>
+</div>

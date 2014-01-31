@@ -1,11 +1,14 @@
 class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationController
-  layout 'hydramata/1_column'
-
   respond_to :html
 
   class_attribute :responder, instance_predicate: false, instance_accessor: false
   self.responder = Hydramata::Deposit::WorksResponder
   prepend_view_path Hydramata::FormResolver.new(self)
+
+  def show
+    validate_request(presented_work)
+    respond_with(presented_work)
+  end
 
   def new
     validate_request(new_work)
@@ -39,6 +42,10 @@ class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationContr
   end
 
   def existing_work
+    @work ||= Hydramata::Deposit.existing_form_for(self, params.fetch(:id))
+  end
+
+  def presented_work
     @work ||= Hydramata::Deposit.existing_form_for(self, params.fetch(:id))
   end
 

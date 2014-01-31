@@ -8,14 +8,24 @@ describe "Depositing a work" do
     within('form#new_work') do
       fill_in('Title', with: "A Verbose Treatise")
       fill_in('Abstract', with: "Lorem ipsum")
-      click_on("Create Article")
+    end
+    click_on("Create Article")
+
+    within('.presenter.presenter-article') do
+      expect(page).to have_selector('.attribute.title', text: "A Verbose Treatise")
+      expect(page).to have_selector('.attribute.abstract', text: "Lorem ipsum")
+    end
+    click_on("Edit this article")
+
+    within('form#edit_work') do
+      fill_in('Title', with: "An alternate treatise")
+    end
+    click_on("Update Article")
+
+    within('.presenter.presenter-article') do
+      expect(page).to have_selector('.attribute.title', text: "An alternate treatise")
+      expect(page).to have_selector('.attribute.abstract', text: "Lorem ipsum")
     end
 
-    # Assumption we are redirecting to the edit action
-    within('form#edit_work') do
-      expect(page).to have_field('Title', with: "A Verbose Treatise")
-      expect(page).to have_field('Abstract', with: "Lorem ipsum")
-      expect(page).to have_button("Update Article")
-    end
   end
 end

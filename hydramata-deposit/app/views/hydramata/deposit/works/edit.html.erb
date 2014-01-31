@@ -11,7 +11,7 @@
 
 <% end %>
 
-<%= simple_form_for(work, url: works_path(work_type: work.work_type), as: :work) do |f| %>
+<%= simple_form_for(work, url: work_path(work), as: :work) do |f| %>
   <% f.object.fieldsets.each do |fieldset| %>
     <%= fieldset.render(f) %>
   <% end %>
