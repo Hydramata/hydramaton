@@ -1,0 +1,18 @@
+<% content_for :page_title, "Listing Works" %>
+
+<div class="presenter presenter-works">
+  <table class="table table-striped">
+    <caption class="table-heading"><h2>Your Works</h2></caption>
+    <thead>
+      <tr><th>Identifier</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% works.each do |work| %>
+      <tr>
+        <td><%= link_to "#{work.to_param} (#{work.work_type})", work_path(work) %></td>
+        <td><%= link_to "edit", edit_work_path(work) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

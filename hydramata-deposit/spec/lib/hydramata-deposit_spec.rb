@@ -41,5 +41,14 @@ module Hydramata
       its(:controller) { should eq(controller) }
       its(:identifier) { should eq(identifier) }
     end
+
+    context '.query_works' do
+      let(:parameters) { {work_type: work_type } }
+      subject { Hydramata::Deposit.query_works(controller, parameters)}
+      before(:each) do
+        Hydramata::Core::WorkDraft.should_receive(:query).with(controller, parameters).and_return(:query_result)
+      end
+      it { should eq :query_result }
+    end
   end
 end

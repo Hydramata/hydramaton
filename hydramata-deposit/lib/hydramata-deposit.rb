@@ -22,6 +22,10 @@ module Hydramata::Deposit
     @new_forms_for[work_type.to_s]
   end
 
+  def query_works(controller, parameters)
+    Hydramata::Core::WorkDraft.query(controller, parameters)
+  end
+
   def authorize!(controller, work)
     true
   end

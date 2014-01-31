@@ -7,6 +7,10 @@ class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationContr
   self.responder = Hydramata::Deposit::WorksResponder
   prepend_view_path Hydramata::FormResolver.new(self)
 
+  def index
+    respond_with(queried_works)
+  end
+
   def show
     validate_request(presented_work)
     respond_with(presented_work)
@@ -53,6 +57,12 @@ class Hydramata::Deposit::WorksController < Hydramata::Deposit::ApplicationContr
 
   attr_reader :work
   helper_method :work
+
+  def queried_works
+    @works ||= Hydramata::Deposit.query_works(self, params)
+  end
+  attr_reader :works
+  helper_method :works
 
   def validate_request(work)
     Hydramata::Deposit.authorize!(self, work)

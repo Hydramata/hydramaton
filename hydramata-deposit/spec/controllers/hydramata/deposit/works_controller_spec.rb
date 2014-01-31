@@ -96,5 +96,19 @@ module Hydramata::Deposit
         end
       end
     end
+
+    context 'index' do
+      context 'GET #index' do
+        before(:each) do
+          Hydramata::Deposit.should_receive(:query_works).with(controller, hash_including(work_type: work_type)).and_return(work_query_results)
+        end
+        let(:work_query_results) { double }
+        it 'should assign a :works' do
+          get :index, work_type: work_type, use_route: :hydramata_deposit
+          expect(assigns(:works)).to eq(work_query_results)
+          expect(response).to be_success
+        end
+      end
+    end
   end
 end

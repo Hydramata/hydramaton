@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20140131184933) do
   add_index "hydramata_core_relationships", ["subject_id", "subject_type"], name: "hc_rel_subject"
   add_index "hydramata_core_relationships", ["target_id", "target_type"], name: "hc_rel_target"
 
-  create_table "hydramata_core_work_drafts", primary_key: "false", force: true do |t|
-    t.string  "pid"
-    t.string  "work_type",        limit: 64
+  create_table "hydramata_core_work_drafts", id: false, force: true do |t|
+    t.string  "pid",                                 null: false
+    t.string  "work_type",        limit: 64,         null: false
     t.integer "owner_id"
     t.string  "owner_type",       limit: 64
     t.text    "attributes_store", limit: 2147483647
