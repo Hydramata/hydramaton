@@ -7,11 +7,15 @@ require "hydramata/institution/version"
 Gem::Specification.new do |s|
   s.name        = "hydramata-institution"
   s.version     = Hydramata::Institution::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Hydramata::Institution."
-  s.description = "TODO: Description of Hydramata::Institution."
+  s.authors     = [
+    "Jeremy Friesen",
+  ]
+  s.email       = [
+    "jeremy.n.friesen@gmail.com"
+  ]
+  s.homepage    = "http://github.com/hydramata/hydramaton"
+  s.summary     = "Hydramata::Institution - Groups and Organizations."
+  s.description = "Hydramata::Institution - Groups and Organizations."
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
