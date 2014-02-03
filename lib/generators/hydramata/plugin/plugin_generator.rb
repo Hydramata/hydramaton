@@ -5,10 +5,10 @@ module Hydramata::Generators
   def path_to_rails_template(path)
     File.join(Bundler.definition.specs['railties'].first.full_gem_path, path)
   end
-  class InternalAppGenerator < Rails::Generators::AppGenerator
+  class DummyAppGenerator < Rails::Generators::AppGenerator
     source_root Hydramata::Generators.path_to_rails_template("lib/rails/generators/rails/app/templates")
     def app_name
-      File.basename(destination_root).tr(".", "_")
+      'dummy'
     end
     def app_const_base
       app_name.classify
@@ -37,7 +37,7 @@ module Hydramata::Generators
       opts = (options || {}).slice(*PASSTHROUGH_OPTIONS)
       opts[:force] = true
       opts[:skip_bundle] = true
-      invoke Hydramata::Generators::InternalAppGenerator,
+      invoke Hydramata::Generators::DummyAppGenerator,
         [ File.expand_path(dummy_path, destination_root) ], opts
     end
 

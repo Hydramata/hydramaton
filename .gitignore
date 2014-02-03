@@ -84,3 +84,4 @@ pickle-email-*.html
 **.log
 **.sqlite*
 **/tmp/*
+**/spec/dummy/public/**
