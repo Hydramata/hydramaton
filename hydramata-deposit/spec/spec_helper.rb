@@ -30,6 +30,12 @@ module InputSupport
   end
 end
 
+module FixtureFileSupport
+  def fixture_file(path)
+    File.expand_path(File.join('../fixtures/files', path), __FILE__)
+  end
+end
+
 
 
 # Checks for pending migrations before tests are run.
@@ -68,6 +74,7 @@ RSpec.configure do |config|
     Hydramata::Deposit.reset_configuration!
   end
 
+  config.include FixtureFileSupport
   config.include InputSupport, type: :input, example_group: {
     file_path: config.escaped_path(%w[spec inputs])
   }
