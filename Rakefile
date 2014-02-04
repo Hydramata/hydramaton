@@ -7,7 +7,6 @@ Hydramaton::Application.load_tasks
 
 namespace :spec do
   plugin_directories = Dir['hydramata-*']
-  desc "Run specs for all hydramata plugins"
   namespace :hydramata do
     plugin_directories.each do |plugin|
       component = plugin.sub(/hydramata\-/, '').to_sym
@@ -22,6 +21,7 @@ namespace :spec do
       end
     end
   end
+  desc "Run specs for all hydramata plugins"
   task :hydramata => ['spec'] + plugin_directories.collect {|dir| dir.gsub("-", ':') }
 end
 
