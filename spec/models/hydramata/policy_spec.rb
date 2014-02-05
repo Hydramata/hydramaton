@@ -6,7 +6,7 @@ describe Hydramata::Policy do
     its(:elements) { should be_a_kind_of(ActiveRecord::Associations::CollectionProxy) }
   end
   context '.query' do
-    it do
+    it 'should parse resource_types' do
       Hydramata::Policy.query(resource_types: 'Article').all
     end
   end

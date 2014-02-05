@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20140205004739) do
 
   create_table "hydramata_policy_elements", force: true do |t|
     t.integer  "policy_id",        null: false
-    t.string   "resource_type"
-    t.string   "group_identifier"
-    t.string   "action_name"
+    t.string   "resource_type",    null: false
+    t.string   "group_identifier", null: false
+    t.string   "action_name",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
