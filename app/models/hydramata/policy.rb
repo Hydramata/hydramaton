@@ -12,10 +12,6 @@ class Hydramata::Policy < ActiveRecord::Base
       where_collector = where_collector.where("#{elements_quoted_table_name}.group_identifier IN (?)", group_identifiers)
     end
 
-    if resource_types = options.fetch(:resource_types) { nil }
-      where_collector = where_collector.where("#{elements_quoted_table_name}.resource_type IN (?)", resource_types)
-    end
-
     if action_names = options.fetch(:action_names) { nil }
       where_collector = where_collector.where("#{elements_quoted_table_name}.action_name IN (?)", action_names)
     end

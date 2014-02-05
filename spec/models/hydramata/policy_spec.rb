@@ -7,7 +7,7 @@ describe Hydramata::Policy do
   end
   context '.query' do
     it 'should parse resource_types' do
-      Hydramata::Policy.query(resource_types: 'Article').all
+      Hydramata::Policy.query(group_identifiers: ['Hello']).all
     end
   end
 end
