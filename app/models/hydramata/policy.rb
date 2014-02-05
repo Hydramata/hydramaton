@@ -8,18 +8,15 @@ class Hydramata::Policy < ActiveRecord::Base
 
     where_collector = includes(:elements)
 
-    group_identifiers = options.fetch(:group_identifiers) { [] }
-    if group_identifiers.present?
+    if group_identifiers = options.fetch(:group_identifiers) { nil }
       where_collector = where_collector.where("#{elements_quoted_table_name}.group_identifier IN (?)", group_identifiers)
     end
 
-    resource_types = options.fetch(:resource_types) { [] }
-    if resource_types.present?
+    if resource_types = options.fetch(:resource_types) { nil }
       where_collector = where_collector.where("#{elements_quoted_table_name}.resource_type IN (?)", resource_types)
     end
 
-    action_names = options.fetch(:action_names) { [] }
-    if action_names.present?
+    if action_names = options.fetch(:action_names) { nil }
       where_collector = where_collector.where("#{elements_quoted_table_name}.action_name IN (?)", action_names)
     end
 
