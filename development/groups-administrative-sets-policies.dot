@@ -1,0 +1,31 @@
+digraph "G" {
+  node[shape=Mrecord];
+  administrative_set_policy_template[label="{AdminSet Policy Template |Which policy to apply to a new Work}"];
+  policy_member[label="{Admin Policy Member | Defines Identifiable/Action pairing}"];
+  policy[label="{Admin Policy | Given who I am can I take the action on the work?}"];
+  group[label="{Group}"];
+  user[label="{User}"];
+  group_member[label="{Group Member | What can I do to the Group\nand its Group Members?}"];
+  identifiable[label="{Identifiable | Because we may want to associate with Users or Groups}"];
+  administrative_set_member[label="{AdminSet Member | What can I do to the AdminSet\nand its AdminSet Members?}"];
+  administrative_set[label="{AdminSet |Gatekeeper for items added to it\nApplies appropriate policies}"];
+  work[label="{Work | An instance of a Work Type}"];
+  work_type[label="{Work Type}"];
+  action[label="{Action | CRUD, Discover, Change Policy}"];
+
+  user -> group_member;
+  group -> group_member;
+  group -> identifiable[arrowhead=odot];
+  user -> identifiable[arrowhead=odot];
+  administrative_set -> administrative_set_member;
+  identifiable -> administrative_set_member;
+  administrative_set -> work;
+  administrative_set -> administrative_set_policy_template;
+  work_type -> administrative_set_policy_template;
+  work -> policy;
+  work_type -> work;
+  policy -> policy_member;
+  action -> policy_member;
+  identifiable -> policy_member;
+  policy -> administrative_set_policy_template;
+}
