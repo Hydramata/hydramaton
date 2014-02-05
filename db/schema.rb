@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131212447) do
+ActiveRecord::Schema.define(version: 20140205004739) do
 
   create_table "hydramata_core_attachments", id: false, force: true do |t|
     t.string   "pid",                   limit: 32, null: false
@@ -48,6 +48,22 @@ ActiveRecord::Schema.define(version: 20140131212447) do
   end
 
   add_index "hydramata_core_work_drafts", ["owner_id", "owner_type"], name: "index_hydramata_core_work_drafts_on_owner_id_and_owner_type", using: :btree
+
+  create_table "hydramata_policies", force: true do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hydramata_policy_elements", force: true do |t|
+    t.integer  "policy_id",        null: false
+    t.string   "resource_type"
+    t.string   "group_identifier"
+    t.string   "action_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
