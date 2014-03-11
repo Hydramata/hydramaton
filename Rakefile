@@ -26,3 +26,12 @@ namespace :spec do
 end
 
 task default: 'spec:hydramata'
+
+begin
+  require 'rspec/yenta'
+  RSpec::Yenta.load_tasks do
+    require File.expand_path("../config/environment.rb",  __FILE__)
+  end
+rescue LoadError
+  puts "Unable to load rspec/yenta; No matches for you!"
+end

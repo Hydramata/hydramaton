@@ -17,17 +17,20 @@ gem 'hydramata-deposit', path: './hydramata-deposit'
 gem 'hydramata-layout', path: './hydramata-layout'
 
 group :development do
+  if ! ENV['TRAVIS']
+    gem 'rspec-yenta'
+    gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+    gem 'guard-bundler'
+    gem 'guard-rails'
+    gem 'guard-rspec'
+    gem 'rb-fchange', :require=>false
+    gem 'rb-fsevent', :require=>false
+    gem 'rb-inotify', :require=>false
+    gem 'byebug'
+  end
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
-  # gem 'quiet_assets'
+  gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
-  gem 'byebug'
 end
 group :development, :test do
   gem 'factory_girl_rails'
