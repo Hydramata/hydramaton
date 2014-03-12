@@ -9,6 +9,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass', '~>2.3'
 gem 'devise'
+gem 'devise_cas_authenticatable'
 gem 'figaro'
 gem 'mysql2'
 gem 'simple_form'
@@ -35,6 +36,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec-given'
 end
 group :production do
   gem 'unicorn'
