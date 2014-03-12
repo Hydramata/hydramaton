@@ -29,5 +29,21 @@ module Hydramata
         callback(:success, group)
       end
     end
+
+    class Create < Hydramata::Runner
+      def run(attributes)
+        group = Hydramata::Group.new_form_for(current_user)
+        group.attributes = attributes
+        if group.save
+          callback(:success, group, success_message(group))
+        else
+          callback(:failure, group)
+        end
+      end
+
+      def success_message(group)
+        I18n.t("hydramata.group.create.success", model_name: group.class.model_name.human)
+      end
+    end
   end
 end

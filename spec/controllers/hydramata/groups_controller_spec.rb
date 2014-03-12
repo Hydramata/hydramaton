@@ -83,16 +83,12 @@ describe Hydramata::GroupsController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved hydramata_group as @hydramata_group" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Hydramata::Group.any_instance.stub(:save).and_return(false)
         post :create, {:hydramata_group => { "name" => nil }}, valid_session
         assigns(:hydramata_group).group.should be_a_new(Hydramata::Group)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Hydramata::Group.any_instance.stub(:save).and_return(false)
-        post :create, {:hydramata_group => { "name" => "invalid value" }}, valid_session
+        post :create, {:hydramata_group => { "name" => nil }}, valid_session
         response.should render_template("new")
       end
     end

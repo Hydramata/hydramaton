@@ -3,6 +3,7 @@ class Hydramata::GroupsController < ApplicationController
 
   layout 'hydramata/1_column'
   before_action :set_hydramata_group, only: [:destroy]
+  respond_to :html
 
   def run(klass, *args, &block)
     klass.new(self, &block).run(*args)
@@ -29,17 +30,15 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def create
-    @hydramata_group = Hydramata::Group.new_form_for(current_user)
-    @hydramata_group.attributes = (params[:hydramata_group] || {})
-
-    respond_to do |format|
-      if @hydramata_group.save
-        format.html { redirect_to @hydramata_group, notice: 'Group was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @hydramata_group }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @hydramata_group.errors, status: :unprocessable_entity }
-      end
+    run(Create, params[:hydramata_group]) do |on|
+      on.success { |group, message|
+        @hydramata_group = group
+        respond_with(@hydramata_group, notice: message)
+      }
+      on.failure { |group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
     end
   end
 
