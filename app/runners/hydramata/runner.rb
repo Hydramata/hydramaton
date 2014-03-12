@@ -24,10 +24,6 @@ module Hydramata
       yield(@callbacks) if block_given?
     end
 
-    def repo
-      context.repo
-    end
-
     def callback(name, *args)
       @callbacks.call(name, *args)
       args
