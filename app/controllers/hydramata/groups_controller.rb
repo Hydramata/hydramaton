@@ -1,6 +1,6 @@
 class Hydramata::GroupsController < ApplicationController
   layout 'hydramata/1_column'
-  before_action :set_hydramata_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_hydramata_group, only: [:show, :destroy]
 
   # GET /hydramata/groups
   # GET /hydramata/groups.json
@@ -21,6 +21,8 @@ class Hydramata::GroupsController < ApplicationController
 
   # GET /hydramata/groups/1/edit
   def edit
+    @hydramata_group = Hydramata::Group.existing_form_for(current_user, params[:id])
+    @hydramata_group.attributes = (params[:hydramata_group] || {})
   end
 
   # POST /hydramata/groups
@@ -43,6 +45,8 @@ class Hydramata::GroupsController < ApplicationController
   # PATCH/PUT /hydramata/groups/1
   # PATCH/PUT /hydramata/groups/1.json
   def update
+    @hydramata_group = Hydramata::Group.existing_form_for(current_user, params[:id])
+
     respond_to do |format|
       if @hydramata_group.update(hydramata_group_params)
         format.html { redirect_to @hydramata_group, notice: 'Group was successfully updated.' }
