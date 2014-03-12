@@ -15,7 +15,8 @@ class Hydramata::GroupsController < ApplicationController
 
   # GET /hydramata/groups/new
   def new
-    @hydramata_group = Hydramata::Group.new
+    @hydramata_group = Hydramata::Group.new_form_for(current_user)
+    @hydramata_group.attributes = (params[:hydramata_group] || {})
   end
 
   # GET /hydramata/groups/1/edit
@@ -25,7 +26,8 @@ class Hydramata::GroupsController < ApplicationController
   # POST /hydramata/groups
   # POST /hydramata/groups.json
   def create
-    @hydramata_group = Hydramata::Group.new(hydramata_group_params)
+    @hydramata_group = Hydramata::Group.new_form_for(current_user)
+    @hydramata_group.attributes = (params[:hydramata_group] || {})
 
     respond_to do |format|
       if @hydramata_group.save
