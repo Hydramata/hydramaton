@@ -24,8 +24,8 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def edit
-    @hydramata_group = Hydramata::Group.existing_form_for(current_user, params[:id])
-    @hydramata_group.attributes = (params[:hydramata_group] || {})
+    params.require(:id)
+    @hydramata_group = run(Edit, params[:id]).first
   end
 
   def create

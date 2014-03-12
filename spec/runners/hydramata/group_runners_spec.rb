@@ -5,6 +5,8 @@ module Hydramata
   module GroupRunners #
     describe GroupRunners do
       Given(:user) { double('User')}
+      Given(:group) { double('Group') }
+      Given(:identifier) { '123' }
       Given(:context) { double('Context', current_user: user) }
       Given(:callback) { StubCallback.new }
       Given(:callback_config) { callback.configure(:success) }
@@ -25,8 +27,6 @@ module Hydramata
           Hydramata::Group.should_receive(:find).with(identifier).and_return(group)
         end
         Given(:runner_class) { Show }
-        Given(:group) { double('Group') }
-        Given(:identifier) { '123' }
         When(:result) { runner.run(identifier) }
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
@@ -34,11 +34,20 @@ module Hydramata
 
       describe New do
         before(:each) do
-          Hydramata::Group.should_receive(:new_form_for).with(current_user).and_return(group)
+          Hydramata::Group.should_receive(:new_form_for).with(user).and_return(group)
         end
         Given(:runner_class) { New }
-        Given(:group) { double('Group') }
         When(:result) { runner.run }
+        Then { expect(result).to eq([group]) }
+        And { callback.invoked == [:success, group] }
+      end
+
+      describe Edit do
+        before(:each) do
+          Hydramata::Group.should_receive(:existing_form_for).with(user, identifier).and_return(group)
+        end
+        Given(:runner_class) { Edit }
+        When(:result) { runner.run(identifier) }
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
       end

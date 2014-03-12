@@ -22,5 +22,12 @@ module Hydramata
         callback(:success, group)
       end
     end
+
+    class Edit < Hydramata::Runner
+      def run(group_id)
+        group = Hydramata::Group.existing_form_for(current_user, group_id)
+        callback(:success, group)
+      end
+    end
   end
 end
