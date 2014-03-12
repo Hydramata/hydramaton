@@ -1,0 +1,27 @@
+<h1>Listing hydramata_groups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hydramata_groups.each do |hydramata_group| %>
+      <tr>
+        <td><%= hydramata_group.name %></td>
+        <td><%= link_to 'Show', hydramata_group %></td>
+        <td><%= link_to 'Edit', edit_hydramata_group_path(hydramata_group) %></td>
+        <td><%= link_to 'Destroy', hydramata_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group', new_hydramata_group_path %>
