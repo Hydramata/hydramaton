@@ -1,4 +1,5 @@
 class Hydramata::GroupsController < ApplicationController
+  layout 'hydramata/1_column'
   before_action :set_hydramata_group, only: [:show, :edit, :update, :destroy]
 
   # GET /hydramata/groups
