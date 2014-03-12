@@ -1,11 +1,19 @@
 class Hydramata::GroupsController < ApplicationController
+  include GroupRunners
+
   layout 'hydramata/1_column'
   before_action :set_hydramata_group, only: [:show, :destroy]
+
+  def run(klass, *args, &block)
+    klass.new(self, &block).run(*args)
+  end
 
   # GET /hydramata/groups
   # GET /hydramata/groups.json
   def index
-    @hydramata_groups = Hydramata::Group.all
+    run(Index) do |on|
+      on.success { |groups| @hydramata_groups = groups }
+    end
   end
 
   # GET /hydramata/groups/1
@@ -69,13 +77,13 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hydramata_group
-      @hydramata_group = Hydramata::Group.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_hydramata_group
+    @hydramata_group = Hydramata::Group.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def hydramata_group_params
-      params.require(:hydramata_group).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def hydramata_group_params
+    params.require(:hydramata_group).permit(:name)
+  end
 end
