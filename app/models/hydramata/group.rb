@@ -4,9 +4,17 @@ module Hydramata
 
     def self.new_form_for(user)
       group = Group.new
-      Group::Form.new(group: group, creator: user)
+      Form.new(group: group, creator: user)
     end
 
+    def self.existing_form_for(user, identifier)
+      group = Group.find(identifier)
+      Form.new(group: group)
+    end
+
+    # A potentially over-worked class (it must handle the create and update
+    # context of a Group). However it does separate the concerns of marshalling
+    # data from the persistence layer.
     class Form
       include Virtus.model
       include ActiveModel::Validations
@@ -14,14 +22,9 @@ module Hydramata
       attribute :name, String
       validates :name, presence: true
 
-      validates :group, presence: true
-      validates :creator, presence: { unless: lambda {|form| form.persisted? } }
-
       attr_reader :creator, :group
       def initialize(input = {}, &block)
-        attrs = input.with_indifferent_access
-        @group = attrs.fetch(:group)
-        @creator = attrs.delete(:creator)
+        extract_collaborators(input)
         super(input, &block)
       end
 
@@ -52,6 +55,17 @@ module Hydramata
       end
       private :__update
 
+      def extract_collaborators(input)
+        attrs = input.with_indifferent_access
+
+        # Instead of relying on validation that the application's user cannot
+        # nor should not specify, I want to raise exceptions. This means that
+        # the issue is on the developer to fix.
+        @group = attrs.fetch(:group)
+        @creator = attrs.fetch(:creator) unless persisted?
+      end
+      private :extract_collaborators
     end
+
   end
 end
