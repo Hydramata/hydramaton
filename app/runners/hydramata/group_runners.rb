@@ -15,5 +15,12 @@ module Hydramata
         callback(:success, group)
       end
     end
+
+    class New < Hydramata::Runner
+      def run
+        group = Hydramata::Group.new_form_for(current_user)
+        callback(:success, group)
+      end
+    end
   end
 end

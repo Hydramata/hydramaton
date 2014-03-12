@@ -16,14 +16,11 @@ class Hydramata::GroupsController < ApplicationController
 
   def show
     params.require(:id)
-    run(Show, params[:id]) do |on|
-      on.success { |group| @hydramata_group = group }
-    end
+    @hydramata_group = run(Show, params[:id]).first
   end
 
   def new
-    @hydramata_group = Hydramata::Group.new_form_for(current_user)
-    @hydramata_group.attributes = (params[:hydramata_group] || {})
+    @hydramata_group = run(New).first
   end
 
   def edit

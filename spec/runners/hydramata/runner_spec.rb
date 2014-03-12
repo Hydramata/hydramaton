@@ -26,5 +26,11 @@ module Hydramata
       Then { context.should_not have_received(:invoked) }
       Then { result == [:first, :second] }
     end
+
+    describe '#current_user' do
+      Given(:user) { double('User') }
+      Given(:context) { double(current_user: user)}
+      Then { runner.current_user == user }
+    end
   end
 end
