@@ -2,7 +2,7 @@ class Hydramata::GroupsController < ApplicationController
   include GroupRunners
 
   layout 'hydramata/1_column'
-  before_action :set_hydramata_group, only: [:show, :destroy]
+  before_action :set_hydramata_group, only: [:destroy]
 
   def run(klass, *args, &block)
     klass.new(self, &block).run(*args)
@@ -15,6 +15,10 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def show
+    params.require(:id)
+    run(Show, params[:id]) do |on|
+      on.success { |group| @hydramata_group = group }
+    end
   end
 
   def new
@@ -74,4 +78,5 @@ class Hydramata::GroupsController < ApplicationController
   def hydramata_group_params
     params.require(:hydramata_group).permit(:name)
   end
+
 end

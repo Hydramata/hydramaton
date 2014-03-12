@@ -17,7 +17,18 @@ module Hydramata
         When(:results) { runner.run }
         Then { expect(results).to eq([groups]) }
         And { callback.invoked == [:success, groups] }
+      end
 
+      describe Show do
+        before(:each) do
+          Hydramata::Group.should_receive(:find).with(identifier).and_return(group)
+        end
+        Given(:runner_class) { Show }
+        Given(:group) { double('Group') }
+        Given(:identifier) { '123' }
+        When(:result) { runner.run(identifier) }
+        Then { expect(result).to eq([group]) }
+        And { callback.invoked == [:success, group] }
       end
     end
   end
