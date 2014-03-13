@@ -40,7 +40,7 @@ module Hydramata
       alias_method :save, :create
 
       def __create
-        group.attributes = { name: name }
+        group.attributes = attributes
         group.save
       end
       private :__create
@@ -51,7 +51,7 @@ module Hydramata
       end
 
       def __update
-        group.update(name: name)
+        group.update(attributes)
       end
       private :__update
 
