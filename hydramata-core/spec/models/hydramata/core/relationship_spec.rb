@@ -19,6 +19,21 @@ module Hydramata::Core
         When(:result) { Relationship.query(predicate: [predicate, other_predicate], creator: creator) }
         Then { expect(result).to eq([relationship1, relationship2]) }
       end
+      context 'cannot yet handle multipe creators' do
+        Given!(:relationship) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
+        When(:result) { Relationship.query(creator: [creator,creator]) }
+        Then { expect(result).to have_raised(NoMethodError) }
+      end
+      context 'cannot yet handle multipe subjects' do
+        Given!(:relationship) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
+        When(:result) { Relationship.query(subject: [subject,subject]) }
+        Then { expect(result).to have_raised(NoMethodError) }
+      end
+      context 'cannot yet handle multipe targets' do
+        Given!(:relationship) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
+        When(:result) { Relationship.query(target: [target,target]) }
+        Then { expect(result).to have_raised(NoMethodError) }
+      end
     end
   end
   describe Relationship::ParameterExtractor do
