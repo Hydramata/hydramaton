@@ -18,7 +18,7 @@ module Hydramata
 
     class New < Hydramata::Runner
       def run
-        group = Hydramata::Group.new_form_for(current_user)
+        group = services.new_group_for(current_user)
         callback(:success, group)
       end
     end
@@ -32,7 +32,7 @@ module Hydramata
 
     class Create < Hydramata::Runner
       def run(attributes)
-        group = Hydramata::Group.new_form_for(current_user)
+        group = services.new_group_for(current_user)
         group.attributes = attributes
         if group.save
           callback(:success, group, success_message(group))

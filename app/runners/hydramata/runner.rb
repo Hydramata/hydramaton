@@ -28,6 +28,10 @@ module Hydramata
       context.current_user
     end
 
+    def services
+      context.services
+    end
+
     def callback(name, *args)
       @callbacks.call(name, *args)
       args

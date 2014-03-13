@@ -7,7 +7,8 @@ module Hydramata
       Given(:user) { double('User')}
       Given(:group) { double('Group') }
       Given(:identifier) { '123' }
-      Given(:context) { double('Context', current_user: user) }
+      Given(:services) { double }
+      Given(:context) { double('Context', current_user: user, services: services) }
       Given(:callback) { StubCallback.new }
       Given(:callback_config) { callback.configure(:success) }
       Given(:runner) {
@@ -33,13 +34,12 @@ module Hydramata
       end
 
       describe New do
-        before(:each) do
-          Hydramata::Group.should_receive(:new_form_for).with(user).and_return(group)
-        end
+        Given(:services) { double('Service', new_group_for: group)}
         Given(:runner_class) { New }
         When(:result) { runner.run }
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
+        And { expect(services).to have_received(:new_group_for).with(user) }
       end
 
       describe Edit do
