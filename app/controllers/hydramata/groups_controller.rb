@@ -28,10 +28,6 @@ class Hydramata::GroupsController < ApplicationController
     end
   end
 
-  def edit
-    @hydramata_group = run(Edit, identifier_params).first
-  end
-
   def create
     run(Create, params[:hydramata_group]) do |on|
       on.success { |group, message|
@@ -43,6 +39,10 @@ class Hydramata::GroupsController < ApplicationController
         respond_with(@hydramata_group)
       }
     end
+  end
+
+  def edit
+    @hydramata_group = run(Edit, identifier_params).first
   end
 
   def update
