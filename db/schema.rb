@@ -143,16 +143,19 @@ ActiveRecord::Schema.define(version: 20140312135638) do
   add_index "hydramata_core_attachments", ["pid"], name: "index_hydramata_core_attachments_on_pid", using: :btree
 
   create_table "hydramata_core_relationships", force: true do |t|
-    t.string  "subject_id",   limit: 32
-    t.string  "subject_type", limit: 32
-    t.string  "relationship", limit: 64
-    t.string  "target_id",    limit: 32
-    t.string  "target_type",  limit: 32
-    t.integer "creator_id"
-    t.string  "creator_type", limit: 64
+    t.string   "subject_id",              null: false
+    t.string   "subject_type", limit: 32, null: false
+    t.string   "predicate",    limit: 64, null: false
+    t.string   "target_id",               null: false
+    t.string   "target_type",  limit: 32, null: false
+    t.string   "creator_id",              null: false
+    t.string   "creator_type", limit: 64, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "hydramata_core_relationships", ["creator_id", "creator_type"], name: "hc_rel_creator", using: :btree
+  add_index "hydramata_core_relationships", ["predicate"], name: "hc_rel_predicate", using: :btree
   add_index "hydramata_core_relationships", ["subject_id", "subject_type"], name: "hc_rel_subject", using: :btree
   add_index "hydramata_core_relationships", ["target_id", "target_type"], name: "hc_rel_target", using: :btree
 
