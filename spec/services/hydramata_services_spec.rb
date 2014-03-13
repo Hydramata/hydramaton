@@ -17,14 +17,16 @@ describe HydramataServices do
     Given(:group) { services.new_group_for(user, attributes) }
     context 'valid save' do
       When(:result) { services.save_group(group, creators: user) }
-      Then { expect(group).to be_persisted }
+      Then { expect(result).to eq true }
+      And { expect(group).to be_persisted }
       And { expect(group.group.creators).to eq([user]) }
     end
 
     context 'invalid save' do
       Given(:attributes) { { name: nil } }
       When(:result) { services.save_group(group, creators: user) }
-      Then { expect(group.group).to_not be_persisted }
+      Then { expect(result).to eq false }
+      And { expect(group.group).to_not be_persisted }
       And { expect(group.group.creators).to eq([]) }
     end
   end
