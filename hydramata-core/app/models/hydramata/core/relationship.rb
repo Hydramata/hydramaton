@@ -82,7 +82,7 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
     attr_reader :predicate
     protected
     def predicate=(value)
-      @predicate = value.to_s.underscore
+      @predicate = value
     end
 
   end

@@ -7,8 +7,18 @@ module Hydramata::Core
     Given(:subject) { double('Subject', id: '456' ) }
     Given(:target) { double('Target', id: '789' ) }
     context '.query' do
-      Given!(:relationship) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
-      Then { expect(Relationship.last).to eq(relationship) }
+      context 'single predicate' do
+        Given!(:relationship) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
+        When(:result) { Relationship.query(predicate: predicate, creator: creator) }
+        Then { expect(result).to eq([relationship]) }
+      end
+      context 'multipe predicates' do
+        Given(:other_predicate) { 'is_managing_member_of' }
+        Given!(:relationship1) { Relationship.create(predicate: predicate, creator: creator, subject: subject, target: target)}
+        Given!(:relationship2) { Relationship.create(predicate: other_predicate, creator: creator, subject: subject, target: target)}
+        When(:result) { Relationship.query(predicate: [predicate, other_predicate], creator: creator) }
+        Then { expect(result).to eq([relationship1, relationship2]) }
+      end
     end
   end
   describe Relationship::ParameterExtractor do
