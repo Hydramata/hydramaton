@@ -11,7 +11,7 @@ class HydramataServices
   end
 
   def save_group(group, collaborators = {})
-    creators = Array(collaborators.fetch(:creators)).flatten.compact
+    creators = Array.wrap(collaborators.fetch(:creators))
     transaction do
       group.save &&
       creators.all? do |creator|
