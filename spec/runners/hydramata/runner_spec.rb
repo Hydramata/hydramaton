@@ -32,5 +32,11 @@ module Hydramata
       Given(:context) { double(current_user: user)}
       Then { runner.current_user == user }
     end
+
+    describe '#services' do
+      Given(:services) { double('Services') }
+      Given(:context) { double(services: services)}
+      Then { runner.services == services }
+    end
   end
 end
