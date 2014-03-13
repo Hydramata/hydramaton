@@ -1,3 +1,12 @@
+# A Relationship is made of 4 attributes:
+# * Subject
+# * Predicate
+# * Target
+# * Creator - who created the relationship
+#
+# In Triples-speak, Subject Predicate Object maps to Subject Predicate Target,
+# but I don't want to define object_id and object_type in the database as that
+# can create all kinds of havoc with Ruby's internal object_id
 class Hydramata::Core::Relationship < ActiveRecord::Base
   validates :subject_id, presence: true
   validates :subject_type, presence: true
