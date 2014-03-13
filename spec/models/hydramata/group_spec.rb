@@ -22,6 +22,7 @@ module Hydramata
       When(:result) { Group.existing_form_for(user, identifier) }
       Then { expect(result.group).to eq(group) }
     end
+
   end
 
   describe Group::Form do

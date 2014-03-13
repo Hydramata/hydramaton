@@ -35,11 +35,38 @@ module Hydramata
 
       describe New do
         Given(:services) { double('Service', new_group_for: group)}
+        Given(:parameters) { {} }
         Given(:runner_class) { New }
-        When(:result) { runner.run }
+        When(:result) { runner.run(parameters) }
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
-        And { expect(services).to have_received(:new_group_for).with(user) }
+        And { expect(services).to have_received(:new_group_for).with(user, parameters) }
+      end
+
+      describe Create do
+        Given(:parameters) { {} }
+        Given(:runner_class) { Create }
+        Given(:services) { double('Service', new_group_for: group, save_group: save_was_successful?) }
+        Given(:group) { double("Group", class: Hydramata::Group)}
+
+        context 'success' do
+          Given(:save_was_successful?) { true }
+          Given(:message) { runner.success_message(group) }
+          When(:result) { runner.run(parameters) }
+          Then { expect(result).to eq([group, message]) }
+          And { callback.invoked == [:success, group, message] }
+          And { expect(services).to have_received(:new_group_for).with(user, parameters) }
+          And { expect(services).to have_received(:save_group).with(group, creators: user) }
+        end
+
+        context 'failure' do
+          Given(:save_was_successful?) { false }
+          When(:result) { runner.run(parameters) }
+          Then { expect(result).to eq([group]) }
+          And { callback.invoked == [:failure, group] }
+          And { expect(services).to have_received(:new_group_for).with(user, parameters) }
+          And { expect(services).to have_received(:save_group).with(group, creators: user) }
+        end
       end
 
       describe Edit do
@@ -51,35 +78,7 @@ module Hydramata
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
       end
-
-      describe Create do
-        before(:each) do
-          Hydramata::Group.should_receive(:new_form_for).with(user).and_return(group)
-        end
-        Given(:parameters) { {} }
-        Given(:runner_class) { Create }
-
-        context 'success' do
-          Given(:group) { double("Group", class: Hydramata::Group, :attributes= => true, :save => true)}
-          Given(:message) { runner.success_message(group) }
-          When(:result) { runner.run(parameters) }
-          Then { expect(result).to eq([group, message]) }
-          And { callback.invoked == [:success, group, message] }
-          And { expect(group).to have_received(:attributes=).with(parameters) }
-          And { expect(group).to have_received(:save) }
-        end
-
-        context 'failure' do
-          Given(:group) { double("Group", :attributes= => true, :save => false)}
-          Given(:parameters) { {} }
-          Given(:runner_class) { Create }
-          When(:result) { runner.run(parameters) }
-          Then { expect(result).to eq([group]) }
-          And { expect(group).to have_received(:attributes=).with(parameters) }
-          And { expect(group).to have_received(:save) }
-          And { callback.invoked == [:failure, group] }
-        end
-      end
     end
+
   end
 end

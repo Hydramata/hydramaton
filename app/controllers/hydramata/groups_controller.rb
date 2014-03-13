@@ -21,7 +21,12 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def new
-    @hydramata_group = run(New).first
+    run(New, params[:hydramata_group]) do |on|
+      on.success { |group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
+    end
   end
 
   def edit

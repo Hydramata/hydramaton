@@ -17,24 +17,16 @@ module Hydramata
     end
 
     class New < Hydramata::Runner
-      def run
-        group = services.new_group_for(current_user)
-        callback(:success, group)
-      end
-    end
-
-    class Edit < Hydramata::Runner
-      def run(group_id)
-        group = Hydramata::Group.existing_form_for(current_user, group_id)
+      def run(attributes)
+        group = services.new_group_for(current_user, attributes)
         callback(:success, group)
       end
     end
 
     class Create < Hydramata::Runner
       def run(attributes)
-        group = services.new_group_for(current_user)
-        group.attributes = attributes
-        if group.save
+        group = services.new_group_for(current_user, attributes)
+        if services.save_group(group, creators: current_user)
           callback(:success, group, success_message(group))
         else
           callback(:failure, group)
@@ -45,5 +37,13 @@ module Hydramata
         I18n.t("hydramata.group.create.success", model_name: group.class.model_name.human)
       end
     end
+
+    class Edit < Hydramata::Runner
+      def run(group_id)
+        group = Hydramata::Group.existing_form_for(current_user, group_id)
+        callback(:success, group)
+      end
+    end
+
   end
 end
