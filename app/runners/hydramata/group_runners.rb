@@ -45,5 +45,20 @@ module Hydramata
       end
     end
 
+    class Update < Hydramata::Runner
+      def run(group_id, attributes)
+        group = Hydramata::Group.existing_form_for(current_user, group_id)
+        if group.update(attributes)
+          callback(:success, group, success_message(group))
+        else
+          callback(:failure, group)
+        end
+      end
+
+      def success_message(group)
+        I18n.t("hydramata.group.update.success", model_name: group.class.model_name.human)
+      end
+    end
+
   end
 end

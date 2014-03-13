@@ -29,7 +29,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def create
-    run(Create, params[:hydramata_group]) do |on|
+    run(Create, hydramata_group_params) do |on|
       on.success { |group, message|
         @hydramata_group = group
         respond_with(@hydramata_group, notice: message)
@@ -46,16 +46,15 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def update
-    @hydramata_group = Hydramata::Group.existing_form_for(current_user, identifier_params)
-
-    respond_to do |format|
-      if @hydramata_group.update(hydramata_group_params)
-        format.html { redirect_to @hydramata_group, notice: 'Group was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @hydramata_group.errors, status: :unprocessable_entity }
-      end
+    run(Update, identifier_params, hydramata_group_params) do |on|
+      on.success { |group, message|
+        @hydramata_group = group
+        respond_with(@hydramata_group, notice: message)
+      }
+      on.failure { |group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
     end
   end
 

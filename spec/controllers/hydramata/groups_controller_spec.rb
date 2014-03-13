@@ -122,17 +122,13 @@ describe Hydramata::GroupsController do
     describe "with invalid params" do
       it "assigns the hydramata_group as @hydramata_group" do
         group = Hydramata::Group.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Hydramata::Group.any_instance.stub(:save).and_return(false)
-        put :update, {:id => group.to_param, :hydramata_group => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => group.to_param, :hydramata_group => { "name" => "" }}, valid_session
         assigns(:hydramata_group).group.should eq(group)
       end
 
       it "re-renders the 'edit' template" do
         group = Hydramata::Group.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Hydramata::Group.any_instance.stub(:save).and_return(false)
-        put :update, {:id => group.to_param, :hydramata_group => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => group.to_param, :hydramata_group => { "name" => "" }}, valid_session
         response.should render_template("edit")
       end
     end

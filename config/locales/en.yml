@@ -24,3 +24,5 @@ en:
     group:
       create:
         success: "%{model_name} successfully created"
+      update:
+        success: "%{model_name} successfully updated"
