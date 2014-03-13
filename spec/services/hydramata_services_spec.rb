@@ -12,6 +12,20 @@ describe HydramataServices do
     And { expect(result.class.model_name).to eq(Hydramata::Group.model_name) }
   end
 
+  context '#create_relationship' do
+    Given(:creator) { double('Creator', id: '123' ) }
+    Given(:subject) { double('Subject', id: '456' ) }
+    Given(:target) { double('Target', id: '789' ) }
+    Given(:predicate) { 'is_member_of' }
+    Given(:attributes) {
+      { predicate: predicate, creator: creator, subject: subject, target: target }
+    }
+    When(:result) { services.create_relationship(attributes) }
+    Then { expect(result).to be_persisted }
+    And { expect(result).to be_an_instance_of(Hydramata::Core::Relationship) }
+
+  end
+
   context '#save_group' do
     Given(:user) { FactoryGirl.create(:user) }
     Given(:group) { services.new_group_for(user, attributes) }

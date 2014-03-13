@@ -14,15 +14,19 @@ class HydramataServices
     creators = Array.wrap(collaborators.fetch(:creators))
     transaction do
       group.save &&
-      creators.all? do |creator|
-        Hydramata::Core::Relationship.create(
+      creators.all? {|creator|
+        create_relationship(
           subject: creator,
           predicate: 'is_creator_of',
           target: group.group,
           creator: creator
         )
-      end
+      }
     end
+  end
+
+  def create_relationship(attributes = {})
+    Hydramata::Core::Relationship.create(attributes)
   end
 
   private
