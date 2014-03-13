@@ -1,5 +1,7 @@
 # Hydramaton
 
+To get a sense for what is going on, look to the [HydramataService object](app/services/hydramata_service.rb).
+
 This Rails application is to be the container for integrating and fleshing-out
 Hydramata components.
 
