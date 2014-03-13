@@ -15,8 +15,17 @@ describe HydramataServices do
   context '#save_group' do
     Given(:user) { FactoryGirl.create(:user) }
     Given(:group) { services.new_group_for(user, attributes) }
-    When(:result) { services.save_group(group, creators: user) }
-    Then { expect(group.group).to eq(Hydramata::Group.last) }
-    And { expect(group.group.creators).to eq([user]) }
+    context 'valid save' do
+      When(:result) { services.save_group(group, creators: user) }
+      Then { expect(group).to be_persisted }
+      And { expect(group.group.creators).to eq([user]) }
+    end
+
+    context 'invalid save' do
+      Given(:attributes) { { name: nil } }
+      When(:result) { services.save_group(group, creators: user) }
+      Then { expect(group.group).to_not be_persisted }
+      And { expect(group.group.creators).to eq([]) }
+    end
   end
 end
