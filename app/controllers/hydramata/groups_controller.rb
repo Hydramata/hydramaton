@@ -16,8 +16,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def show
-    params.require(:id)
-    @hydramata_group = run(Show, params[:id]).first
+    @hydramata_group = run(Show, identifier_params).first
   end
 
   def new
@@ -30,8 +29,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def edit
-    params.require(:id)
-    @hydramata_group = run(Edit, params[:id]).first
+    @hydramata_group = run(Edit, identifier_params).first
   end
 
   def create
@@ -48,7 +46,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def update
-    @hydramata_group = Hydramata::Group.existing_form_for(current_user, params[:id])
+    @hydramata_group = Hydramata::Group.existing_form_for(current_user, identifier_params)
 
     respond_to do |format|
       if @hydramata_group.update(hydramata_group_params)
@@ -72,12 +70,16 @@ class Hydramata::GroupsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_hydramata_group
-    @hydramata_group = Hydramata::Group.find(params[:id])
+    @hydramata_group = Hydramata::Group.find(identifier_params)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def hydramata_group_params
-    params.require(:hydramata_group).permit(:name)
+    params.permit(hydramata_group: [:name])[:hydramata_group] || {}
+  end
+
+  def identifier_params
+    params.require(:id)
   end
 
 end

@@ -114,7 +114,7 @@ describe Hydramata::GroupsController do
 
       it "redirects to the hydramata_group" do
         group = Hydramata::Group.create! valid_attributes
-        put :update, {:id => group.to_param, :hydramata_group => valid_attributes}, valid_session
+        put :update, {:id => group.to_param, :hydramata_group => {name: 'Hello New Name'}}, valid_session
         response.should redirect_to(group)
       end
     end
