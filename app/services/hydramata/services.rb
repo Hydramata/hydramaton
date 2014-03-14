@@ -6,5 +6,6 @@
 module Hydramata
   class Services
     include ServiceContainer::GroupServices
+    include ServiceContainer::GroupMembershipServices
   end
 end
