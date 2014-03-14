@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/runners/hydramata/group_runners'
+require 'hydramata/group_runners'
 
 module Hydramata
   module GroupRunners

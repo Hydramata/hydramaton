@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/runners/hydramata/runner'
+require 'hydramata/runner'
 
 module Hydramata
 

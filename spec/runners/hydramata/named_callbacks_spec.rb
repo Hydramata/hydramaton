@@ -1,5 +1,5 @@
 require 'fast_helper'
-require 'app/runners/hydramata/named_callbacks'
+require 'hydramata/named_callbacks'
 
 module Hydramata
   describe NamedCallbacks do
