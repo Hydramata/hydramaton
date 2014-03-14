@@ -62,7 +62,7 @@ module Hydramata
 
     class Destroy < Hydramata::Runner
       def run(group_id)
-        group = Hydramata::Group.find(group_id)
+        group = services.find_group(group_id)
         group.destroy
         callback(:success, group)
       end

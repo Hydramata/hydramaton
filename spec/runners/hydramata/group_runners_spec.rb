@@ -105,9 +105,7 @@ module Hydramata
       end
 
       describe Destroy do
-        before(:each) do
-          Hydramata::Group.should_receive(:find).with(identifier).and_return(group)
-        end
+        Given(:services) { double('Service', find_group: group)}
         Given(:runner_class) { Destroy }
         Given(:group) { double('Group', destroy: true) }
         When(:result) { runner.run(identifier) }
