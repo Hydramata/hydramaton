@@ -39,15 +39,15 @@ module Hydramata
     end
 
     class Edit < Hydramata::Runner
-      def run(group_id)
-        group = Hydramata::Group.existing_form_for(current_user, group_id)
+      def run(group_id, attributes = {})
+        group = services.edit_group_for(current_user, group_id, attributes)
         callback(:success, group)
       end
     end
 
     class Update < Hydramata::Runner
       def run(group_id, attributes)
-        group = Hydramata::Group.existing_form_for(current_user, group_id)
+        group = services.edit_group_for(current_user, group_id)
         if group.update(attributes)
           callback(:success, group, success_message(group))
         else

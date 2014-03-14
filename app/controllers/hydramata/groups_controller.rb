@@ -14,7 +14,12 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def show
-    @hydramata_group = run(Show, identifier_params).first
+    run(Show, identifier_params) do |on|
+      on.success { |group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
+    end
   end
 
   def new
@@ -40,7 +45,12 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def edit
-    @hydramata_group = run(Edit, identifier_params).first
+    run(Edit, identifier_params, hydramata_group_params) do |on|
+      on.success { |group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
+    end
   end
 
   def update

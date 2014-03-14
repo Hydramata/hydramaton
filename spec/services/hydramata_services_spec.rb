@@ -18,6 +18,15 @@ describe HydramataServices do
     And { expect(result.class.model_name).to eq(Hydramata::Group.model_name) }
   end
 
+  context '#edit_group_for' do
+    Given!(:group) { FactoryGirl.create(:hydramata_group) }
+    Given(:attributes) { {name: 'Hello World'} }
+    When(:result) { services.edit_group_for(user, group.id, attributes) }
+    Then { expect(result.group).to eq(group) }
+    And { expect(result.name).to eq(attributes.fetch(:name)) }
+    And { expect(result.class.model_name).to eq(Hydramata::Group.model_name) }
+  end
+
   context '#create_relationship' do
     Given(:creator) { double('Creator', id: '123' ) }
     Given(:subject) { double('Subject', id: '456' ) }

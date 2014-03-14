@@ -70,20 +70,18 @@ module Hydramata
       end
 
       describe Edit do
-        before(:each) do
-          Hydramata::Group.should_receive(:existing_form_for).with(user, identifier).and_return(group)
-        end
+        Given(:services) { double('Service', edit_group_for: group) }
+        Given(:attributes) { {name: 'Title'} }
         Given(:runner_class) { Edit }
-        When(:result) { runner.run(identifier) }
+        When(:result) { runner.run(identifier, attributes) }
         Then { expect(result).to eq([group]) }
+        And { expect(services).to have_received(:edit_group_for).with(user, identifier, attributes) }
         And { callback.invoked == [:success, group] }
       end
 
       describe Update do
-        before(:each) do
-          Hydramata::Group.should_receive(:existing_form_for).with(user, identifier).and_return(group)
-        end
-        Given(:attributes) { {} }
+        Given(:services) { double('Service', edit_group_for: group) }
+        Given(:attributes) { {name: 'Title'} }
         Given(:group) { double('Group', class: Hydramata::Group, update: update_was_successful?)}
         Given(:runner_class) { Update }
 
@@ -92,13 +90,16 @@ module Hydramata
           Given(:message) { runner.success_message(group) }
           When(:result) { runner.run(identifier, attributes) }
           Then { expect(result).to eq([group, message]) }
+          And { expect(services).to have_received(:edit_group_for).with(user, identifier) }
           And { expect(group).to have_received(:update).with(attributes) }
           And { callback.invoked == [:success, group, message] }
         end
+
         context 'failure' do
           Given(:update_was_successful?) { false }
           When(:result) { runner.run(identifier, attributes) }
           Then { expect(result).to eq([group]) }
+          And { expect(services).to have_received(:edit_group_for).with(user, identifier) }
           And { expect(group).to have_received(:update).with(attributes) }
           And { callback.invoked == [:failure, group] }
         end

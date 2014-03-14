@@ -10,6 +10,12 @@ class HydramataServices
     group
   end
 
+  def edit_group_for(user, group_id, attributes = {})
+    group = Hydramata::Group.existing_form_for(user, group_id)
+    group.attributes = attributes if attributes.present?
+    group
+  end
+
   def save_group(group, collaborators = {})
     creators = Array.wrap(collaborators.fetch(:creators))
     transaction do
