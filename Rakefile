@@ -49,8 +49,8 @@ end
 begin
   require 'yard/rake/yardoc_task'
   YARD::Rake::YardocTask.new(:doc) do |t|
-    t.files   = ['app/**/*.rb', 'lib/**/*.rb', '-', 'README.md', 'LICENSE']
-    t.options
+    t.files = ['app/**/*.rb', 'lib/**/*.rb', '-', 'README.md', 'LICENSE']
+    t.options = ['-r', 'README.md']
   end
 rescue LoadError
   puts "Unable to load yard/rake/yardoc_task; No docs for you!"
