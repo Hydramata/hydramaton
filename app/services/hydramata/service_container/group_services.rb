@@ -25,7 +25,7 @@ module Hydramata::ServiceContainer
             subject: creator,
             predicate: 'is_creator_of',
             target: group.group,
-            creator: creator
+            authority: creator
           )
         }
       end

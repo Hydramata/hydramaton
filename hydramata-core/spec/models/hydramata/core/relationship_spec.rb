@@ -43,6 +43,6 @@ module Hydramata::Core
     Given(:target) { double('Target', id: '789' ) }
     Given(:normalizer) { Relationship::ParameterExtractor.new({predicate: 'is_author_of', creator: creator, subject: subject, target: target}) }
     When(:result) { normalizer.to_hash }
-    Then { expect(result).to eq({subject_id: subject.id, subject_type: subject.class.to_s, predicate: 'is_author_of', target_id: target.id, target_type: target.class.to_s, creator_id: creator.id, creator_type: creator.class.to_s})}
+    Then { expect(result).to eq({subject_id: subject.id, subject_type: subject.class.to_s, predicate: 'is_author_of', target_id: target.id, target_type: target.class.to_s, authority_id: creator.id, authority_type: creator.class.to_s})}
   end
 end

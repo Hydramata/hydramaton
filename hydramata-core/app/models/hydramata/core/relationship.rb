@@ -13,8 +13,8 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
   validates :predicate, presence: true
   validates :target_id, presence: true
   validates :target_type, presence: true
-  validates :creator_id, presence: true
-  validates :creator_type, presence: true
+  validates :authority_id, presence: true
+  validates :authority_type, presence: true
 
   def self.subjects_for(collaborators = {})
     query(collaborators).map { |obj| obj.subject }
@@ -40,8 +40,8 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
     target_type.constantize.find(target_id)
   end
 
-  def creator
-    creator_type.constantize.find(creator_id)
+  def authority
+    authority_type.constantize.find(authority_id)
   end
 
   class ParameterExtractor
@@ -49,7 +49,7 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
       @subject = collaborators[:subject]
       @target = collaborators[:target]
       self.predicate = collaborators[:predicate]
-      @creator = collaborators[:creator]
+      @authority = collaborators[:authority]
     end
 
     def to_hash
@@ -59,8 +59,8 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
       returning_value[:predicate] = predicate if predicate.present?
       returning_value[:target_id] = target_id if target_id.present?
       returning_value[:target_type] = target_type if target_type.present?
-      returning_value[:creator_id] = creator_id if creator_id.present?
-      returning_value[:creator_type] = creator_type if creator_type.present?
+      returning_value[:authority_id] = authority_id if authority_id.present?
+      returning_value[:authority_type] = authority_type if authority_type.present?
       returning_value
     end
 
@@ -80,12 +80,12 @@ class Hydramata::Core::Relationship < ActiveRecord::Base
       @target.present? ? @target.class.to_s : nil
     end
 
-    def creator_id
-      @creator.present? ? @creator.id : nil
+    def authority_id
+      @authority.present? ? @authority.id : nil
     end
 
-    def creator_type
-      @creator.present? ? @creator.class.to_s : nil
+    def authority_type
+      @authority.present? ? @authority.class.to_s : nil
     end
 
     attr_reader :predicate

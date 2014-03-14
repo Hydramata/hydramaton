@@ -37,12 +37,12 @@ module Hydramata::ServiceContainer
     end
 
     context '#create_relationship' do
-      Given(:creator) { double('Creator', id: '123' ) }
+      Given(:authority) { double('Authority', id: '123' ) }
       Given(:subject) { double('Subject', id: '456' ) }
       Given(:target) { double('Target', id: '789' ) }
       Given(:predicate) { 'is_member_of' }
       Given(:attributes) {
-        { predicate: predicate, creator: creator, subject: subject, target: target }
+        { predicate: predicate, authority: authority, subject: subject, target: target }
       }
       When(:result) { services.create_relationship(attributes) }
       Then { expect(result).to be_persisted }

@@ -4,8 +4,8 @@ module Hydramata::ServiceContainer
       group = collaborators.fetch(:group)
       person = collaborators.fetch(:person)
       predicate = collaborators.fetch(:predicate) { :is_member_of }
-      creator = collaborators.fetch(:creator) { Hydramata.system_authority }
-      Hydramata::Core::Relationship.create(subject: person, predicate: predicate, target: group, creator: creator)
+      authority = collaborators.fetch(:authority) { Hydramata.system_authority }
+      Hydramata::Core::Relationship.create(subject: person, predicate: predicate, target: group, authority: authority)
     end
   end
 end

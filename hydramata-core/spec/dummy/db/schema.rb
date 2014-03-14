@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -33,13 +32,13 @@ ActiveRecord::Schema.define(version: 20140131203748) do
     t.string   "predicate",    limit: 64, null: false
     t.string   "target_id",               null: false
     t.string   "target_type",  limit: 32, null: false
-    t.string   "creator_id",              null: false
-    t.string   "creator_type", limit: 64, null: false
+    t.string   "authority_id",              null: false
+    t.string   "authority_type", limit: 64, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "hydramata_core_relationships", ["creator_id", "creator_type"], name: "hc_rel_creator"
+  add_index "hydramata_core_relationships", ["authority_id", "authority_type"], name: "hc_rel_creator"
   add_index "hydramata_core_relationships", ["predicate"], name: "hc_rel_predicate"
   add_index "hydramata_core_relationships", ["subject_id", "subject_type"], name: "hc_rel_subject"
   add_index "hydramata_core_relationships", ["target_id", "target_type"], name: "hc_rel_target"
