@@ -25,6 +25,10 @@ class HydramataServices
     end
   end
 
+  def find_group(group_id)
+    Hydramata::Group.find(group_id)
+  end
+
   def create_relationship(attributes = {})
     Hydramata::Core::Relationship.create(attributes)
   end

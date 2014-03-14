@@ -5,6 +5,12 @@ describe HydramataServices do
   Given(:user) { FactoryGirl.build_stubbed(:user) }
   Given(:attributes) { {name: 'Name'} }
 
+  context '#find_group' do
+    Given!(:group) { FactoryGirl.create(:hydramata_group) }
+    When(:result) { services.find_group(group.id) }
+    Then { expect(result).to eq(group) }
+  end
+
   context '#new_group_for' do
     When(:result) { services.new_group_for(user, attributes) }
     Then { expect(result.creator).to eq(user) }
