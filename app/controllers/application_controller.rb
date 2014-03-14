@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     #
     #   @see ApplicationController#run
   end
-  self.class_attribute :runner_container, instance_accessor: false
+  self.class_attribute :runner_container
 
   # So you can more easily decouple the controller's command behavior and
   # response behavior.
