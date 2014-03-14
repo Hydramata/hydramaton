@@ -9,7 +9,10 @@ class Hydramata::GroupsController < ApplicationController
 
   def index
     run(Index) do |on|
-      on.success { |groups| @hydramata_groups = groups }
+      on.success { |groups|
+        @hydramata_groups = groups
+        respond_with(@hydramata_groups)
+      }
     end
   end
 
