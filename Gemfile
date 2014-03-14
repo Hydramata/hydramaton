@@ -30,6 +30,7 @@ group :development do
     gem 'byebug'
     gem 'better_errors'
     gem 'quiet_assets'
+    gem 'yard'
   end
   gem 'rails_layout'
 end
