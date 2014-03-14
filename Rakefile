@@ -23,6 +23,16 @@ namespace :spec do
   end
   desc "Run specs for all hydramata plugins"
   task :hydramata => ['db:test:prepare', 'spec'] + plugin_directories.collect {|dir| dir.gsub("-", ':') }
+
+  desc 'Run the Travis CI specs'
+  task :travis do
+    ENV['RAILS_ENV'] = 'test'
+    ENV['SPEC_OPTS'] = "--profile 20"
+    Rails.env = 'test'
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:test:prepare'].invoke
+    Rake::Task['spec'].invoke
+  end
 end
 
 task default: 'spec:hydramata'
