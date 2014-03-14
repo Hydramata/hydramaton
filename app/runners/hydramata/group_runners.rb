@@ -1,4 +1,5 @@
 require_dependency './app/runners/hydramata/runner'
+require_dependency 'i18n'
 
 module Hydramata
   module GroupRunners
@@ -34,7 +35,7 @@ module Hydramata
       end
 
       def success_message(group)
-        I18n.t("hydramata.group.create.success", model_name: group.class.model_name.human)
+        I18n.t("hydramata.group.create.success", model_name: HumanReadableModelName(group))
       end
     end
 
@@ -56,7 +57,7 @@ module Hydramata
       end
 
       def success_message(group)
-        I18n.t("hydramata.group.update.success", model_name: group.class.model_name.human)
+        I18n.t("hydramata.group.update.success", model_name: HumanReadableModelName(group))
       end
     end
 

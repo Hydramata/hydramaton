@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'fast_helper'
 require 'app/runners/hydramata/group_runners'
 
 module Hydramata
@@ -47,7 +47,7 @@ module Hydramata
         Given(:attributes) { {} }
         Given(:runner_class) { Create }
         Given(:services) { double('Service', new_group_for: group, save_group: save_was_successful?) }
-        Given(:group) { double("Group", class: Hydramata::Group)}
+        Given(:group) { double("Group", human_readable_model_name: 'Group')}
 
         context 'success' do
           Given(:save_was_successful?) { true }
@@ -82,7 +82,7 @@ module Hydramata
       describe Update do
         Given(:services) { double('Service', edit_group_for: group) }
         Given(:attributes) { {name: 'Title'} }
-        Given(:group) { double('Group', class: Hydramata::Group, update: update_was_successful?)}
+        Given(:group) { double('Group', human_readable_model_name: 'Group', update: update_was_successful?)}
         Given(:runner_class) { Update }
 
         context 'success' do

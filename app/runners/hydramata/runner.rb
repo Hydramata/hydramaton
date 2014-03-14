@@ -17,6 +17,7 @@ module Hydramata
   # to the Command/Query separation principle.
   class Runner
     attr_reader :context
+    attr_reader :translator
 
     def self.run(context,*args,&block)
       new(context, &block).run(*args)
@@ -44,5 +45,15 @@ module Hydramata
     def run(*args)
       raise NotImplementedError.new("You must define #{self.class}#run")
     end
+
+    protected
+
+    def HumanReadableModelName(object)
+      return object.human_readable_model_name if object.respond_to?(:human_readable_model_name)
+      return object.model_name.human if object.respond_to?(:model_name)
+      return object.class.model_name.human if object.class.respond_to?(:model_name)
+      return object.to_s
+    end
+
   end
 end
