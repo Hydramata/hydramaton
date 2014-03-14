@@ -1,0 +1,2 @@
+module Hydramata::GroupsHelper
+end

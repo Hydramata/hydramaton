@@ -26,4 +26,6 @@ Hydramaton::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.application_root_url = "http://localhost:3000"
 end

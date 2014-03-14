@@ -9,6 +9,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass', '~>2.3'
 gem 'devise'
+gem 'devise_cas_authenticatable'
 gem 'figaro'
 gem 'mysql2'
 gem 'simple_form'
@@ -27,14 +28,15 @@ group :development do
     gem 'rb-fsevent', :require=>false
     gem 'rb-inotify', :require=>false
     gem 'byebug'
+    gem 'better_errors'
+    gem 'quiet_assets'
   end
-  gem 'better_errors'
-  gem 'quiet_assets'
   gem 'rails_layout'
 end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'rspec-given'
 end
 group :production do
   gem 'unicorn'

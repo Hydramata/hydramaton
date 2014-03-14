@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hydramata:
+    group:
+      create:
+        success: "%{model_name} successfully created"
+      update:
+        success: "%{model_name} successfully updated"
