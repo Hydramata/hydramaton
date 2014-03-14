@@ -6,6 +6,10 @@ module Hydramata
       Core::Relationship.subjects_for(predicate: :is_creator_of, target: self)
     end
 
+    def members
+      Core::Relationship.subjects_for(predicate: :is_member_of, target: self)
+    end
+
     def self.new_form_for(user)
       group = Group.new
       Form.new(group: group, creator: user)

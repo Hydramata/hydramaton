@@ -23,6 +23,16 @@ module Hydramata
       Then { expect(result.group).to eq(group) }
     end
 
+    context '#creators' do
+      When(:result) { group.creators }
+      Then { expect(result).to be_an(Enumerable)}
+    end
+
+    context '#members' do
+      When(:result) { group.members }
+      Then { expect(result).to be_an(Enumerable)}
+    end
+
   end
 
 end
