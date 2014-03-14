@@ -3,7 +3,6 @@
 # This controller looks different from other controllers. Why? In part because
 # I am exploring another means of developing an application, one that can be
 # extended without major code surgery.
-#
 class Hydramata::GroupsController < ApplicationController
   layout 'hydramata/1_column'
   respond_to :html

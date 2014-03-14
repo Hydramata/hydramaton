@@ -28,9 +28,9 @@ group :development do
     gem 'rb-fsevent', :require=>false
     gem 'rb-inotify', :require=>false
     gem 'byebug'
+    gem 'better_errors'
+    gem 'quiet_assets'
   end
-  gem 'better_errors'
-  gem 'quiet_assets'
   gem 'rails_layout'
 end
 group :development, :test do

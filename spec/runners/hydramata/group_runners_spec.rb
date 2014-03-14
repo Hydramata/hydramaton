@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'app/runners/hydramata/group_runners'
 
 module Hydramata
-  module GroupRunners #
+  module GroupRunners
     describe GroupRunners do
       Given(:user) { double('User')}
       Given(:group) { double('Group') }
@@ -24,13 +24,12 @@ module Hydramata
       end
 
       describe Show do
-        before(:each) do
-          Hydramata::Group.should_receive(:find).with(identifier).and_return(group)
-        end
+        Given(:services) { double('Service', find_group: group)}
         Given(:runner_class) { Show }
         When(:result) { runner.run(identifier) }
         Then { expect(result).to eq([group]) }
         And { callback.invoked == [:success, group] }
+        And { expect(services).to have_received(:find_group).with(identifier) }
       end
 
       describe New do

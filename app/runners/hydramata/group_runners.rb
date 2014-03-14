@@ -11,7 +11,7 @@ module Hydramata
 
     class Show < Hydramata::Runner
       def run(group_id)
-        group = Hydramata::Group.find(group_id)
+        group = services.find_group(group_id)
         callback(:success, group)
       end
     end
