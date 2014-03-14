@@ -17,5 +17,11 @@ module Hydramata::ServiceContainer
       And { expect(result).to be_an_instance_of(Hydramata::Core::Relationship) }
     end
 
+    context '#remove_member_from_group' do
+      Given!(:memberships) { services.add_member_to_group(group: group, person: user, predicate: 'is_member_of', authority: authority) }
+      When(:result) { services.remove_member_from_group(group: group, person: user) }
+      Then { expect(group.members).to eq([]) }
+    end
+
   end
 end
