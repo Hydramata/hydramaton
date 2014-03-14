@@ -22,7 +22,7 @@ namespace :spec do
     end
   end
   desc "Run specs for all hydramata plugins"
-  task :hydramata => ['spec'] + plugin_directories.collect {|dir| dir.gsub("-", ':') }
+  task :hydramata => ['db:test:prepare', 'spec'] + plugin_directories.collect {|dir| dir.gsub("-", ':') }
 end
 
 task default: 'spec:hydramata'
