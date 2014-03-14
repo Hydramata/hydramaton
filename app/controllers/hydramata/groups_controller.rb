@@ -1,10 +1,8 @@
 class Hydramata::GroupsController < ApplicationController
-  include GroupRunners
-
   layout 'hydramata/1_column'
-  before_action :set_hydramata_group, only: [:destroy]
   respond_to :html
 
+  include GroupRunners
   def run(klass, *args, &block)
     klass.new(self, &block).run(*args)
   end
@@ -59,19 +57,12 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def destroy
-    @hydramata_group.destroy
-    respond_to do |format|
-      format.html { redirect_to hydramata_groups_url }
-      format.json { head :no_content }
+    run(Destroy, identifier_params) do |on|
+      on.success {|group| respond_with(group) }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_hydramata_group
-    @hydramata_group = Hydramata::Group.find(identifier_params)
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def hydramata_group_params
     params.permit(hydramata_group: [:name])[:hydramata_group] || {}

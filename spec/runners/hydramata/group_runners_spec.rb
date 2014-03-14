@@ -103,6 +103,19 @@ module Hydramata
           And { callback.invoked == [:failure, group] }
         end
       end
+
+      describe Destroy do
+        before(:each) do
+          Hydramata::Group.should_receive(:find).with(identifier).and_return(group)
+        end
+        Given(:runner_class) { Destroy }
+        Given(:group) { double('Group', destroy: true) }
+        When(:result) { runner.run(identifier) }
+        Then { expect(result).to eq([group]) }
+        And { expect(group).to have_received(:destroy) }
+        And { callback.invoked == [:success, group] }
+      end
+
     end
 
   end
