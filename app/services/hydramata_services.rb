@@ -4,6 +4,11 @@
 #
 #
 class HydramataServices
+
+  def all_groups
+    Hydramata::Group.all
+  end
+
   def new_group_for(creator, attributes = {})
     group = Hydramata::Group.new_form_for(creator)
     group.attributes = attributes if attributes.present?

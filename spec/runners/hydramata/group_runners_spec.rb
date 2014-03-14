@@ -17,7 +17,8 @@ module Hydramata
 
       describe Index do
         Given(:runner_class) { Index }
-        Given(:groups) { [] }
+        Given(:services) { double('Service', all_groups: groups)}
+        Given(:groups) { [group] }
         When(:results) { runner.run }
         Then { expect(results).to eq([groups]) }
         And { callback.invoked == [:success, groups] }

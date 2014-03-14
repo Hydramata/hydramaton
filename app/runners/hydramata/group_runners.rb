@@ -4,7 +4,7 @@ module Hydramata
   module GroupRunners
     class Index < Hydramata::Runner
       def run
-        groups = Hydramata::Group.all
+        groups = services.all_groups
         callback(:success, groups)
       end
     end
