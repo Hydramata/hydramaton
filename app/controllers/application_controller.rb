@@ -16,7 +16,24 @@ class ApplicationController < ActionController::Base
   self.theme = Hydramata.configuration.layout.theme
   helper_method :theme
 
+  # So you can specify where you will be finding an action's Runner class.
   class_attribute :runner_container
+
+  # So you can more easily decouple the controller's command behavior and
+  # response behavior.
+  #
+  # @Example
+  #   def index
+  #     run(specific_params) do |on|
+  #       on.success { |collection|
+  #         @collection = collection
+  #         respond_with(@collection)
+  #       }
+  #     end
+  #   end
+  #
+  # @See Hydramata::Runner for more information about runners
+  # @See .runner_container
   def run(*args, &block)
     runner_name = action_name.classify
     if runner_container.const_defined?(runner_name)
@@ -27,7 +44,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # So you can easily invoke the public services of Hydramata.
+  # It is these services that indicate what the application can and is doing.
   def services
     @services ||= HydramataServices.new
   end
+  helper_method :services
 end
