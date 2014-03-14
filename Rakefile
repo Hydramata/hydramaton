@@ -47,4 +47,6 @@ rescue LoadError
 end
 
 # Removing doc:app as this isn't working
-Rake::Task['doc:app'].clear rescue true
+['doc:app', 'test', 'test:all', 'test:all:db', 'test:uncommitted', 'test:recent'].each do |task_name|
+  Rake::Task[task_name].clear rescue true
+end
