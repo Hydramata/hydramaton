@@ -1,4 +1,4 @@
-# Before you go too far, read up on Hydramata::Runner.
+# @see Hydramata::Runner
 #
 # This controller looks different from other controllers. Why? In part because
 # I am exploring another means of developing an application, one that can be

@@ -1,5 +1,5 @@
 module Hydramata
-  class RunnerNotFoundError < RuntimeError
+  class RunnerNotFoundError < RuntimeError # :nodoc:
     def initialize(runner_container, runner_name)
       super("Unable to find #{runner_name} in #{runner_container}")
     end
@@ -16,13 +16,21 @@ class ApplicationController < ActionController::Base
   self.theme = Hydramata.configuration.layout.theme
   helper_method :theme
 
-  # So you can specify where you will be finding an action's Runner class.
-  class_attribute :runner_container
+  # Because yardoc's scope imperative does not appear to work, I'm pushing the
+  # comments into the class definition
+  class << self
+    # @!attribute [rw] runner_container
+    #   So you can specify where you will be finding an action's Hydramata::Runner
+    #   class.
+    #
+    #   @see ApplicationController#run
+  end
+  self.class_attribute :runner_container, instance_accessor: false
 
   # So you can more easily decouple the controller's command behavior and
   # response behavior.
   #
-  # @Example
+  # @example
   #   def index
   #     run(specific_params) do |on|
   #       on.success { |collection|
@@ -32,8 +40,8 @@ class ApplicationController < ActionController::Base
   #     end
   #   end
   #
-  # @See Hydramata::Runner for more information about runners
-  # @See .runner_container
+  # @see Hydramata::Runner More information about runners
+  # @see ApplicationController.runner_container for customization
   def run(*args, &block)
     runner_name = action_name.classify
     if runner_container.const_defined?(runner_name)
@@ -46,6 +54,8 @@ class ApplicationController < ActionController::Base
 
   # So you can easily invoke the public services of Hydramata.
   # It is these services that indicate what the application can and is doing.
+  #
+  # @see Hydramata::Services for the default services
   def services
     @services ||= Hydramata::Services.new
   end
