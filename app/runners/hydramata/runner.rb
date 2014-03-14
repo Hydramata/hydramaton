@@ -18,6 +18,10 @@ module Hydramata
   class Runner
     attr_reader :context
 
+    def self.run(context,*args,&block)
+      new(context, &block).run(*args)
+    end
+
     def initialize(context)
       @callbacks = NamedCallbacks.new
       @context = context
@@ -35,6 +39,10 @@ module Hydramata
     def callback(name, *args)
       @callbacks.call(name, *args)
       args
+    end
+
+    def run(*args)
+      raise NotImplementedError.new("You must define #{self.class}#run")
     end
   end
 end

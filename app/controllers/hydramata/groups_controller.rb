@@ -1,14 +1,17 @@
+# Before you go too far, read up on Hydramata::Runner.
+#
+# This controller looks different from other controllers. Why? In part because
+# I am exploring another means of developing an application, one that can be
+# extended without major code surgery.
+#
 class Hydramata::GroupsController < ApplicationController
   layout 'hydramata/1_column'
   respond_to :html
 
-  include GroupRunners
-  def run(klass, *args, &block)
-    klass.new(self, &block).run(*args)
-  end
+  self.runner_container = GroupRunners
 
   def index
-    run(Index) do |on|
+    run do |on|
       on.success { |groups|
         @hydramata_groups = groups
         respond_with(@hydramata_groups)
@@ -17,7 +20,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def show
-    run(Show, identifier_params) do |on|
+    run(identifier_params) do |on|
       on.success { |group|
         @hydramata_group = group
         respond_with(@hydramata_group)
@@ -26,7 +29,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def new
-    run(New, hydramata_group_params) do |on|
+    run(hydramata_group_params) do |on|
       on.success { |group|
         @hydramata_group = group
         respond_with(@hydramata_group)
@@ -35,7 +38,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def create
-    run(Create, hydramata_group_params) do |on|
+    run(hydramata_group_params) do |on|
       on.success { |group, message|
         @hydramata_group = group
         respond_with(@hydramata_group, notice: message)
@@ -48,7 +51,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def edit
-    run(Edit, identifier_params, hydramata_group_params) do |on|
+    run(identifier_params, hydramata_group_params) do |on|
       on.success { |group|
         @hydramata_group = group
         respond_with(@hydramata_group)
@@ -57,7 +60,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def update
-    run(Update, identifier_params, hydramata_group_params) do |on|
+    run(identifier_params, hydramata_group_params) do |on|
       on.success { |group, message|
         @hydramata_group = group
         respond_with(@hydramata_group, notice: message)
@@ -70,7 +73,7 @@ class Hydramata::GroupsController < ApplicationController
   end
 
   def destroy
-    run(Destroy, identifier_params) do |on|
+    run(identifier_params) do |on|
       on.success {|group| respond_with(group) }
     end
   end

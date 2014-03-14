@@ -15,6 +15,11 @@ module Hydramata
 
     Invariant { runner.context == context }
 
+    describe "#run" do
+      When(:response) { runner.run }
+      Then { expect(response).to have_raised(NotImplementedError) }
+    end
+
     describe "calling other" do
       When(:result) { runner.callback(:other, :first, :second) }
       Then { context.should have_received(:invoked).with("OTHER", :first, :second) }
