@@ -74,7 +74,10 @@ class Hydramata::GroupsController < ApplicationController
 
   def destroy
     run(identifier_params) do |on|
-      on.success {|group| respond_with(group) }
+      on.success {|group|
+        @hydramata_group = group
+        respond_with(@hydramata_group)
+      }
     end
   end
 
