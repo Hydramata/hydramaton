@@ -7,7 +7,7 @@ class Hydramata::GroupsController < ApplicationController
   layout 'hydramata/1_column'
   respond_to :html
 
-  self.runner_container = GroupRunners
+  self.runner_container ||= GroupRunners
 
   def index
     run do |on|
