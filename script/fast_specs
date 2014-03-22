@@ -13,6 +13,7 @@ fast_specs = FileList['spec/**/*_spec.rb'].select { |fn|
   Fast.spec?(fn)
 }
 if fast_specs.any?
+  puts "Running fast specs: #{fast_specs}"
   system "rspec #{fast_specs}"
 else
   puts "Unable to find any fast specs"
